@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "243651729948",
+    "project_id": "wellbeingclinicbd",
+    "storage_bucket": "wellbeingclinicbd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243651729948:android:fe8c5928441c6702e71dd9",
+        "android_client_info": {
+          "package_name": "com.sofolit.wellbeingclinic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243651729948-auqbsnlja9ob4jleh051ur2qq486c84m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJxNyIS6HPEGF1l27QG-CLqjXc_IDuoBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243651729948-auqbsnlja9ob4jleh051ur2qq486c84m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
