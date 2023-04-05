@@ -20,7 +20,7 @@ class ItemCard extends StatefulWidget {
 }
 
 class _ItemCardState extends State<ItemCard> {
-  int _selectedOption = 0;
+  int _selectedOption = 10;
 
   @override
   Widget build(BuildContext context) {

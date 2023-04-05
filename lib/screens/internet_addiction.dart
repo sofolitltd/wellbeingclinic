@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wellbeingclinic/items/items.dart';
 
-import '/screens/result.dart';
+import '/screens/internet_addiction_result.dart';
 import '../models/result_model.dart';
 import '../widgets/question_card.dart';
 
@@ -67,7 +67,6 @@ class _InternetAddictionState extends State<InternetAddiction> {
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 16,
-                  horizontal: 8,
                 ),
                 child: ElevatedButton(
                   onPressed: () {
@@ -99,7 +98,7 @@ class _InternetAddictionState extends State<InternetAddiction> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Result(
+                            builder: (context) => InternetAddictionResult(
                               resultModel: ResultModel(
                                   sum: sum, title: title, subtitle: subtitle),
                             ),
@@ -115,7 +114,7 @@ class _InternetAddictionState extends State<InternetAddiction> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Result(
+                            builder: (context) => InternetAddictionResult(
                                 resultModel: ResultModel(
                                     sum: sum,
                                     title: title,
@@ -135,7 +134,7 @@ class _InternetAddictionState extends State<InternetAddiction> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Result(
+                            builder: (context) => InternetAddictionResult(
                                 resultModel: ResultModel(
                                     sum: sum,
                                     title: title,

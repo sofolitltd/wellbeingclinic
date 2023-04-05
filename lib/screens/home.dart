@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wellbeingclinic/screens/dark_triad.dart';
 import 'package:wellbeingclinic/screens/internet_addiction.dart';
+import 'package:wellbeingclinic/screens/self_esteem.dart';
+import 'package:wellbeingclinic/screens/wellbeing.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -23,6 +25,42 @@ class Home extends StatelessWidget {
           vertical: 12,
         ),
         children: [
+          // wellbeing
+          Card(
+            elevation: 3,
+            child: ListTile(
+              onTap: () {
+                // to
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Wellbeing(),
+                  ),
+                );
+              },
+              title: const Text('Wellbeing Scale (WHO-5 Index)'),
+              subtitle: const Text('5 items'),
+            ),
+          ),
+
+          // self esteem
+          Card(
+            elevation: 3,
+            child: ListTile(
+              onTap: () {
+                // to
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SelfEsteem(),
+                  ),
+                );
+              },
+              title: const Text('Self Esteem'),
+              subtitle: const Text('10 items'),
+            ),
+          ),
+
           // internet addiction
           Card(
             elevation: 3,

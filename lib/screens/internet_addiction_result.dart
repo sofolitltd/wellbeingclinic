@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../models/result_model.dart';
 
-class Result extends StatelessWidget {
-  const Result({Key? key, required this.resultModel}) : super(key: key);
+class InternetAddictionResult extends StatelessWidget {
+  const InternetAddictionResult({Key? key, required this.resultModel})
+      : super(key: key);
 
   final ResultModel resultModel;
 

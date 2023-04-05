@@ -69,7 +69,6 @@ class _DarkTriadState extends State<DarkTriad> {
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 16,
-                  horizontal: 8,
                 ),
                 child: ElevatedButton(
                   onPressed: () {

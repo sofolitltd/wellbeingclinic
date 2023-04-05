@@ -1,9 +1,33 @@
 import '../models/question_model.dart';
 
 class Items {
+  // wellbeing
+  static List wellbeingScale = [0, 1, 2, 3, 4, 5];
+  static List<ItemModel> wellbeingItems = [
+    ItemModel(
+      1,
+      'বিগত দুই সপ্তাহ ধরে আমি প্রফুল্ল ও আদন্দ অনুভব করেছি।',
+    ),
+    ItemModel(
+      2,
+      'বিগত দুই সপ্তাহ ধরে আমি শান্ত ও স্বস্থি অনুভব করছি।',
+    ),
+    ItemModel(
+      3,
+      'বিগত দুই সপ্তাহ ধরে আমি সক্রিয় এবং সবল ছিলাম।',
+    ),
+    ItemModel(
+      4,
+      'বিগত দুই সপ্তাহ ধরে আমি সতেজ এবং ফুরফুরে অনুভূতি নিয়ে ঘুম থেকে জেগেছি।',
+    ),
+    ItemModel(
+      5,
+      'বিগত দুই সপ্তাহ ধরে দৈনন্দিন জীবনে এমন বিষয়গুলো আমি পেয়েছি যেগুলো আমি আগ্রহ নিয়ে চেয়েছি।',
+    ),
+  ];
+
   // internet addiction Text
   static List internetAddictionScale = [1, 2, 3, 4, 5];
-
   static List<ItemModel> internetAddictionItems = [
     ItemModel(
       1,
@@ -57,7 +81,6 @@ class Items {
 
   // Dark Triad Dirty Dozen
   static List dartTriadScale = [1, 2, 3, 4, 5, 6, 7];
-
   static List<ItemModel> dartTriadItems = [
     ItemModel(
       1,
@@ -95,32 +118,52 @@ class Items {
         'আমার মাঝে অন্যদের থেকে বিশেষ আনুকূল্য প্রত্যাশা করার প্রবণতা রয়েছে।'),
   ];
 
-  // wellbeing
-  static List wellbeingScale = [0, 1, 2, 3, 4, 5];
-  static List<ItemModel> wellbeingItems = [
+  // selfEsteem
+  static List selfEsteemScale = [3, 2, 1, 0];
+  static List<ItemModel> selfEsteemItems = [
     ItemModel(
       1,
-      'বিগত দুই সপ্তাহ ধরে আমি প্রফুল্ল ও আদন্দ অনুভব করেছি।',
+      'অন্যদের সাথে সমান মাপকাঠিতে বিচার করলে আমি মনে করি আমি একজন যোগ্য ব্যক্তি।',
     ),
     ItemModel(
       2,
-      'বিগত দুই সপ্তাহ ধরে আমি শান্ত ও স্বস্থি অনুভব করছি।',
+      'আমি মনে করি আমার বেশ কিছু ভাল গুণ আছে।',
     ),
     ItemModel(
       3,
-      'বিগত দুই সপ্তাহ ধরে আমি সক্রিয় এবং সবল ছিলাম।',
+      'সামগ্রিক বিচারে আমার মনে করার প্রবণতা আছে যে আমি ব্যর্থ।',
     ),
     ItemModel(
       4,
-      'বিগত দুই সপ্তাহ ধরে আমি সতেজ এবং ফুরফুরে অনুভূতি নিয়ে ঘুম থেকে জেগেছি।',
+      'বেশিরভাগ লোকের মতো আমিও বিভিন্ন কাজ করতে সক্ষম।',
     ),
     ItemModel(
       5,
-      'বিগত দুই সপ্তাহ ধরে দৈনন্দিন জীবনে এমন বিষয়গুলো আমি পেয়েছি যেগুলো আমি আগ্রহ নিয়ে চেয়েছি।',
+      'আমার মনে হই গর্ব করার মত আমার বেশি কিছু নেই।',
+    ),
+    ItemModel(
+      6,
+      'নিজের প্রতি আমার ইতিবাচক মনোভাব আছে।',
+    ),
+    ItemModel(
+      7,
+      'আমি নিজেকে নিয়ে মোটামুটি সন্তুষ্ট।',
+    ),
+    ItemModel(
+      8,
+      'আমার ইচ্ছে হই আমি নিজের প্রতি আরও শ্রদ্ধাশীল হবো।',
+    ),
+    ItemModel(
+      9,
+      'মাঝে মাঝে আমার মনে হই আমার মূল্য নেই।',
+    ),
+    ItemModel(
+      10,
+      'মাঝে মাঝে আমার মনে হই আমি মোটেও ভালো নেই।',
     ),
   ];
 
-  // wellbeing
+  // socialAnxiety
   static List socialAnxietyScale = [0, 1];
   static List<ItemModel> socialAnxietyItems = [
     ItemModel(
