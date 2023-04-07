@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:group_radio_button/group_radio_button.dart';
+
+import '../models/scale_model.dart';
 
 class ItemCard extends StatefulWidget {
   const ItemCard({
@@ -20,7 +20,7 @@ class ItemCard extends StatefulWidget {
 }
 
 class _ItemCardState extends State<ItemCard> {
-  int _selectedOption = 10;
+  ScaleModel? _selectedOption;
 
   @override
   Widget build(BuildContext context) {
@@ -33,35 +33,44 @@ class _ItemCardState extends State<ItemCard> {
           padding: const EdgeInsets.all(16),
           child: Text(
             '${widget.testItems[widget.index].id}. ${widget.testItems[widget.index].title}',
-            style: GoogleFonts.tiroBangla(),
+            style: const TextStyle(fontFamily: 'tiro'),
           ),
         ),
 
         //
         Container(
-          height: 48,
+          padding: const EdgeInsets.symmetric(vertical: 4),
           color: Colors.grey.shade300,
-          child: Row(
+          child: Column(
             children: widget.testScale
-                .map((e) => Expanded(
-                      child: RadioButton<int>(
-                        description: e.toString(),
-                        value: e,
-                        groupValue: _selectedOption,
-                        onChanged: (value) {
-                          _selectedOption = value!;
-
-                          widget.testAnswer
-                              .remove(widget.testItems[widget.index].id);
-                          widget.testAnswer.putIfAbsent(
-                              widget.testItems[widget.index].id, () => value);
-                          print(widget.testAnswer);
-
-                          //
-                          setState(() {});
-                        },
+                .map(
+                  (option) => RadioListTile<ScaleModel>(
+                    title: Text(
+                      option.title,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'tiro',
                       ),
-                    ))
+                    ),
+                    value: option,
+                    groupValue: _selectedOption,
+                    onChanged: (value) {
+                      print(value!.id);
+                      setState(() {
+                        _selectedOption = value;
+
+                        //
+                        widget.testAnswer
+                            .remove(widget.testItems[widget.index].id);
+                        widget.testAnswer.putIfAbsent(
+                            widget.testItems[widget.index].id, () => value.id);
+                        print(widget.testAnswer);
+                      });
+                    },
+                    visualDensity: const VisualDensity(vertical: -3),
+                    dense: true,
+                  ),
+                )
                 .toList(),
           ),
         ),

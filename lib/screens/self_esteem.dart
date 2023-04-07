@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:wellbeingclinic/items/items.dart';
-import 'package:wellbeingclinic/models/result_model.dart';
-import 'package:wellbeingclinic/screens/self_esteem_result.dart';
 
+import '/items/items.dart';
+import '/models/result_model.dart';
+import '/screens/self_esteem_result.dart';
 import '../widgets/question_card.dart';
 
 class SelfEsteem extends StatefulWidget {
@@ -21,9 +20,8 @@ class _SelfEsteemState extends State<SelfEsteem> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Self Esteem Scale',
-          style: GoogleFonts.hindSiliguri(),
         ),
       ),
 
@@ -40,8 +38,8 @@ class _SelfEsteemState extends State<SelfEsteem> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'নিচে আত্মমর্যাদা সম্পর্কিত ১০টি উক্তি রয়েছে। প্রতিটি উক্তি আপনার ক্ষেত্রে কতটুকু প্রযোজ্য তা ৪টি পছন্দক্রমের যেকোনো একটিতে টিক(v) চিহ্ন দিয়ে প্রকাশ করুন। \n 3 = সম্পূর্ণভাবে একমত \n 2 = একমত \n 1 = একমত নই \n 0 = একেবারেই একমত নই',
-                style: GoogleFonts.tiroBangla(),
+                Items.selfEsteemInstruction,
+                style: const TextStyle(fontFamily: 'tiro'),
               ),
 
               const SizedBox(height: 16),
@@ -57,7 +55,7 @@ class _SelfEsteemState extends State<SelfEsteem> {
                   return ItemCard(
                     index: index,
                     testItems: Items.selfEsteemItems,
-                    testScale: Items.selfEsteemScale,
+                    testScale: itemChecker(Items.selfEsteemItems[index].id),
                     testAnswer: testAnswer,
                   );
                 },
@@ -88,15 +86,18 @@ class _SelfEsteemState extends State<SelfEsteem> {
                           content: Text('Please fill all items')));
                     } else {
                       //todo: result
+                      //1,2,4,6,7 +
+                      //3,5,8,9,10 -
                       var result = sum.round();
+
                       String title = '';
                       String subtitle = '';
                       if (result < 15) {
                         title = 'Low';
                         subtitle = 'low self esteem';
                       } else if (result.clamp(15, 20) == result) {
-                        title = 'LOW';
-                        subtitle = 'low self esteem';
+                        title = 'NORMAL';
+                        subtitle = 'normal self esteem';
                       } else if (result > 25) {
                         title = 'High';
                         subtitle = 'high self esteem';
@@ -129,4 +130,13 @@ class _SelfEsteemState extends State<SelfEsteem> {
       ),
     );
   }
+}
+
+itemChecker(var items) {
+  // p =12467
+  //n = 358910
+  if (items == 1 || items == 2 || items == 4 || items == 6 || items == 7) {
+    return Items.selfEsteemScaleP;
+  }
+  return Items.selfEsteemScaleN;
 }

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 
 import '/items/items.dart';
 import '/models/result_model.dart';
-import '/screens/wellbeing_result.dart';
+import '/screens/self_esteem_result.dart';
 import '../widgets/question_card.dart';
 
-class Wellbeing extends StatefulWidget {
-  const Wellbeing({Key? key}) : super(key: key);
+class Stress extends StatefulWidget {
+  const Stress({Key? key}) : super(key: key);
 
   @override
-  State<Wellbeing> createState() => _WellbeingState();
+  State<Stress> createState() => _StressState();
 }
 
-class _WellbeingState extends State<Wellbeing> {
+class _StressState extends State<Stress> {
   Map testAnswer = {};
 
   @override
@@ -20,8 +20,8 @@ class _WellbeingState extends State<Wellbeing> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          'Wellbeing Scale',
+        title: const Text(
+          'Stress Scale',
         ),
       ),
 
@@ -38,7 +38,7 @@ class _WellbeingState extends State<Wellbeing> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                Items.wellbeingInstruction,
+                Items.stressInstruction,
                 style: const TextStyle(fontFamily: 'tiro'),
               ),
 
@@ -50,12 +50,12 @@ class _WellbeingState extends State<Wellbeing> {
                     const SizedBox(height: 16),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: Items.wellbeingItems.length,
+                itemCount: Items.stressItems.length,
                 itemBuilder: (context, index) {
                   return ItemCard(
                     index: index,
-                    testItems: Items.wellbeingItems,
-                    testScale: Items.wellbeingScale,
+                    testItems: Items.stressItems,
+                    testScale: Items.stressScale,
                     testAnswer: testAnswer,
                   );
                 },
@@ -81,21 +81,35 @@ class _WellbeingState extends State<Wellbeing> {
                     // print out the sum
                     print(sum);
 
-                    if ((testAnswer.length != Items.wellbeingItems.length)) {
+                    if ((testAnswer.length != Items.selfEsteemItems.length)) {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text('Please fill all items')));
                     } else {
                       //todo: result
-                      var result = sum * 4.round();
+                      //1,2,4,6,7 +
+                      //3,5,8,9,10 -
+                      var result = sum.round();
+
                       String title = '';
-                      String subtitle = 'your wellbeing score in percentage';
+                      String subtitle = '';
+                      if (result < 15) {
+                        title = 'Low';
+                        subtitle = 'low self esteem';
+                      } else if (result.clamp(15, 20) == result) {
+                        title = 'LOW';
+                        subtitle = 'low self esteem';
+                      } else if (result > 25) {
+                        title = 'High';
+                        subtitle = 'high self esteem';
+                      }
+
                       //
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => WellbeingResult(
+                          builder: (context) => SelfEsteemResult(
                             resultModel: ResultModel(
-                              sum: result,
+                              sum: result.toDouble(),
                               title: title,
                               subtitle: subtitle,
                             ),

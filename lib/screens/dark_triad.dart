@@ -1,10 +1,9 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:wellbeingclinic/items/items.dart';
-import 'package:wellbeingclinic/screens/dark_triad_result.dart';
 
+import '/items/items.dart';
+import '/screens/dark_triad_result.dart';
 import '../widgets/question_card.dart';
 
 class DarkTriad extends StatefulWidget {
@@ -22,9 +21,8 @@ class _DarkTriadState extends State<DarkTriad> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Dark Triad Dirty Dozen',
-          style: GoogleFonts.hindSiliguri(),
         ),
       ),
 
@@ -41,8 +39,8 @@ class _DarkTriadState extends State<DarkTriad> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'নিম্নে ব্যক্তিত্ব পরিমাপের কিছু উক্তি রয়েছে। প্রতিটি উক্তি আপনার ক্ষেত্রে কতুটুকু প্রযোজ্য তা ৭ মানকের যা কোন একটিতে টিকে প্রদানের মাধ্যমের প্রকাশ করুন।\n 1 = দৃঢ় ভাবে অসম্মতি\n 2 = অসম্মতি\n 3 = সামান্য অসম্মতি\n 4 = অসম্মতি বা সম্মতি কোনটি নয়\n 5 = সামান্য সম্মতি\n 6 = সম্মতি\n 7 = দৃঢ় ভাবে সম্মতি',
-                style: GoogleFonts.tiroBangla(),
+                Items.dartTriadInstruction,
+                style: const TextStyle(fontFamily: 'tiro'),
               ),
 
               const SizedBox(height: 16),

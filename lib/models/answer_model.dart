@@ -1,6 +1,6 @@
-class AnsModel {
+class AnswerModel {
   final String id;
   final String ans;
 
-  AnsModel(this.id, this.ans);
+  AnswerModel(this.id, this.ans);
 }

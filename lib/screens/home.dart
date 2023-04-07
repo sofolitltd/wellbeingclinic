@@ -4,6 +4,8 @@ import 'package:wellbeingclinic/screens/internet_addiction.dart';
 import 'package:wellbeingclinic/screens/self_esteem.dart';
 import 'package:wellbeingclinic/screens/wellbeing.dart';
 
+import 'social_anxiety.dart';
+
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -38,7 +40,7 @@ class Home extends StatelessWidget {
                   ),
                 );
               },
-              title: const Text('Wellbeing Scale (WHO-5 Index)'),
+              title: const Text('Wellbeing Scale'),
               subtitle: const Text('5 items'),
             ),
           ),
@@ -61,6 +63,24 @@ class Home extends StatelessWidget {
             ),
           ),
 
+          //todo: // stress
+          // Card(
+          //   elevation: 3,
+          //   child: ListTile(
+          //     onTap: () {
+          //       // to
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //           builder: (context) => const Stress(),
+          //         ),
+          //       );
+          //     },
+          //     title: const Text('Stress Scale'),
+          //     subtitle: const Text('20 items'),
+          //   ),
+          // ),
+
           // internet addiction
           Card(
             elevation: 3,
@@ -74,7 +94,7 @@ class Home extends StatelessWidget {
                   ),
                 );
               },
-              title: const Text('Internet Addiction Test (IAT)'),
+              title: const Text('Internet Addiction Test'),
               subtitle: const Text('18 items'),
             ),
           ),
@@ -92,8 +112,26 @@ class Home extends StatelessWidget {
                   ),
                 );
               },
-              title: const Text('Dark Triad Dirty Dozen (DTDD)'),
+              title: const Text('Dark Triad Dirty Dozen'),
               subtitle: const Text('12 items'),
+            ),
+          ),
+
+          // social anxiety
+          Card(
+            elevation: 3,
+            child: ListTile(
+              onTap: () {
+                // to
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SocialAnxiety(),
+                  ),
+                );
+              },
+              title: const Text('Social Anxiety'),
+              subtitle: const Text('28 items'),
             ),
           ),
         ],
