@@ -33,6 +33,8 @@ class TestCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 color: test.color,
               ),
+              padding: const EdgeInsets.all(4),
+              child: Image.asset('assets/images/${test.image}.png'),
             ),
             const SizedBox(width: 16),
             Expanded(

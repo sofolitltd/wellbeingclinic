@@ -13,14 +13,9 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: size.width > 1000 ? size.width * .2 : 0,
-          ),
-          child: Image.asset(
-            'assets/images/wellbeing_clinic.png',
-            height: 40,
-          ),
+        title: Image.asset(
+          'assets/images/wellbeing_clinic.png',
+          height: 40,
         ),
       ),
       body: SingleChildScrollView(
@@ -81,7 +76,7 @@ List<Tests> testList = [
     description:
         'Measure of mental well-being focusing entirely on positive aspects of mental health',
     color: kGreenColor,
-    image: '',
+    image: '1',
     items: '5',
     route: '/wellbeing',
   ),
@@ -90,32 +85,33 @@ List<Tests> testList = [
     description:
         'Measures global self-worth by measuring both positive and negative feelings about the self',
     color: kPurpleColor,
-    image: '',
+    image: '2',
     items: '10',
     route: '/self-steam',
   ),
+  // Tests(
+  //   title: 'Stress Scale',
+  //   description: 'Measuring the amount of stress experienced recently',
+  //   color: kYellowColor,
+  //   image: '',
+  //   items: '20',
+  //   route: '/stress',
+  // ),
   Tests(
-    title: 'Stress Scale',
-    description: 'Measuring the amount of stress experienced recently',
-    color: kYellowColor,
-    image: '',
+    title: 'Depression, Anxiety & Stress Scale',
+    description:
+        'Measuring the amount of depression, anxiety and stress experienced recently',
+    color: kMediumBlueColor,
+    image: '4',
     items: '20',
-    route: '/stress',
-  ),
-  Tests(
-    title: 'Internet Addiction Test',
-    description: 'Measures the presence and severity of internet addiction',
-    color: kBlueColor,
-    image: '',
-    items: '18',
-    route: '/internet-addiction',
+    route: '/das',
   ),
   Tests(
     title: 'Dark Triad Dirty Dozen',
     description:
         'Use to determine whether or not we may embody the dark triad personality traits',
     color: kPinkColor,
-    image: '',
+    image: '3',
     items: '12',
     route: '/dark-triad',
   ),
@@ -124,8 +120,16 @@ List<Tests> testList = [
     description:
         'Assess how comfortable when we are interacting with other people',
     color: kLightBlueColor,
-    image: '',
+    image: '5',
     items: '28',
     route: '/social-anxiety',
+  ),
+  Tests(
+    title: 'Internet Addiction Test',
+    description: 'Measures the presence and severity of internet addiction',
+    color: kBlueColor,
+    image: '6',
+    items: '18',
+    route: '/internet-addiction',
   ),
 ];

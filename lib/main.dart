@@ -1,22 +1,22 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'package:wellbeingclinic/auth/splash.dart';
-import 'package:wellbeingclinic/screens/dark_triad.dart';
-import 'package:wellbeingclinic/screens/home.dart';
-import 'package:wellbeingclinic/screens/internet_addiction.dart';
-import 'package:wellbeingclinic/screens/self_esteem.dart';
-import 'package:wellbeingclinic/screens/social_anxiety.dart';
-import 'package:wellbeingclinic/screens/stress.dart';
-import 'package:wellbeingclinic/screens/wellbeing.dart';
+import 'package:wellbeingclinic/screens/das.dart';
 
-import 'firebase_options.dart';
+import '/auth/splash.dart';
+import '/screens/dark_triad.dart';
+import '/screens/home.dart';
+import '/screens/internet_addiction.dart';
+import '/screens/self_esteem.dart';
+import '/screens/social_anxiety.dart';
+import '/screens/stress.dart';
+import '/screens/wellbeing.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+  //todo: add firebase
   setPathUrlStrategy();
   runApp(const MyApp());
 }
@@ -54,9 +54,10 @@ class MyApp extends StatelessWidget {
         '/wellbeing': (context) => const Wellbeing(),
         '/self-steam': (context) => const SelfEsteem(),
         '/stress': (context) => const Stress(),
-        '/internet-addiction': (context) => const InternetAddiction(),
+        '/das': (context) => const DAS(),
         '/dark-triad': (context) => const DarkTriad(),
         '/social-anxiety': (context) => const SocialAnxiety(),
+        '/internet-addiction': (context) => const InternetAddiction(),
       },
     );
   }

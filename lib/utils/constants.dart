@@ -6,3 +6,4 @@ const Color kYellowColor = Color(0xffFFF5C0);
 const Color kBlueColor = Color(0xffCDE2F3);
 const Color kPinkColor = Color(0xffFFEEE4);
 const Color kLightBlueColor = Color(0xffF1F4F9);
+const Color kMediumBlueColor = Color(0xffbddef1);
