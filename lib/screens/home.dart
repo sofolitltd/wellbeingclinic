@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
                 horizontal: size.width > 1000 ? size.width * .2 : 16,
               ),
               child: Text(
-                "Psychological Assessment",
+                "Psychological Tests",
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       fontWeight: FontWeight.w600,
                     ),

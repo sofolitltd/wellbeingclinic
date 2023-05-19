@@ -115,11 +115,11 @@ class _SelfEsteemState extends State<SelfEsteem> {
 
                             //
                             setState(() => _inProgress = true);
-                            await Future.delayed(const Duration(seconds: 5))
+                            await Future.delayed(const Duration(seconds: 3))
                                 .then(
                               (value) {
                                 //
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => SelfEsteemResult(

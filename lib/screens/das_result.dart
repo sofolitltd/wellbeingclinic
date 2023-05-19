@@ -73,7 +73,7 @@ class DASResult extends StatelessWidget {
                         description: '0-14 = Normal'
                             '\n15-18 =  Mild'
                             '\n19-25 = Moderate'
-                            '\n26-29 = Severe'
+                            '\n26-33 = Severe'
                             '\n34+ = Extremely Severe',
                         color: kBlueColor,
                       ),
