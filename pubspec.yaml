@@ -90,7 +90,6 @@ flutter:
 
     - family: hindSiliguri
       fonts:
-        - asset: assets/fonts/HindSiliguri-Regular.ttf
         - asset: assets/fonts/HindSiliguri-Medium.ttf
-          weight: 700
+
 
