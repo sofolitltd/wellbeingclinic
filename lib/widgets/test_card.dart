@@ -48,13 +48,22 @@ class TestCard extends StatelessWidget {
                       test.title,
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                             fontWeight: FontWeight.w700,
+                            letterSpacing: .4,
+                            height: 1.2,
                           ),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       test.description,
-                      style:
-                          Theme.of(context).textTheme.labelMedium!.copyWith(),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                            wordSpacing: 1.2,
+                            height: 1.3,
+                            letterSpacing: .2,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blueGrey,
+                          ),
                     ),
                   ],
                 ),

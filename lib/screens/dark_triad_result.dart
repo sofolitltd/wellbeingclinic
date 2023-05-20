@@ -150,7 +150,7 @@ class DarkTriadCard extends StatelessWidget {
             child: Text(
               description,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontFamily: 'tiro',
+                    fontFamily: 'hindSiliguri',
                   ),
             ),
           ),

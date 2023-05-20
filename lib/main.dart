@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'hindSiliguri',
         appBarTheme: const AppBarTheme(
           elevation: 0,
           backgroundColor: Color(0xff72dfc1),

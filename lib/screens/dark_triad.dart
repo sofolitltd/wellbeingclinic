@@ -3,8 +3,8 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 
 import '/items/items.dart';
+import '../widgets/item_card.dart';
 import '../widgets/loading.dart';
-import '../widgets/question_card.dart';
 import 'dark_triad_result.dart';
 
 class DarkTriad extends StatefulWidget {

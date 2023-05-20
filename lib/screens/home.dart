@@ -28,9 +28,11 @@ class Home extends StatelessWidget {
                 horizontal: size.width > 1000 ? size.width * .2 : 16,
               ),
               child: Text(
-                "Psychological Tests",
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontWeight: FontWeight.w600,
+                "Psychological Tests".toUpperCase(),
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
+                      color: Colors.blueGrey,
                     ),
               ),
             ),

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '/items/items.dart';
 import '/models/result_model.dart';
 import '/screens/self_esteem_result.dart';
+import '../widgets/item_card.dart';
 import '../widgets/loading.dart';
-import '../widgets/question_card.dart';
 
 class SelfEsteem extends StatefulWidget {
   const SelfEsteem({Key? key}) : super(key: key);
@@ -103,7 +103,7 @@ class _SelfEsteemState extends State<SelfEsteem> {
                               title = 'LOW - Self Esteem';
                               subtitle =
                                   'আপনি আত্মবিশ্বাসহীনতায় ভুগেন, নিজের প্রতি নেতিবাচক ধারনা রাখেন।আপনার নিজের কর্মদক্ষতা নিয়ে আপনি সন্দিহান থাকেন। নতুন চ্যালেঞ্জ গ্রহণ করতে পছন্দ করেন না। কিছুসময় আপনি নিজেকে গুটিয়ে রাখতে পছন্দ করেন।';
-                            } else if (result.clamp(15, 20) == result) {
+                            } else if (result.clamp(15, 25) == result) {
                               title = 'NORMAL - Self Esteem';
                               subtitle =
                                   'আপনি আত্মবিশ্বাসী। দৈনন্দিন জীবনের কিছু পরিস্থিতিতে আপনি কিছুটা বিচলিত অনুভব করলেও পরবর্তীতে তা সম্পন্ন করতে পারেন। আপনি অতিরিক্ত চিন্তা বা দুশ্চিন্তা করতে পছন্দ করেন না। আপনি আপনার পারিপার্শ্বিক মানুষকে ইতিবাচক ভাবে গ্রহণ করেন,সুসম্পর্ক বজায় রাখেন।';
@@ -153,10 +153,15 @@ class _SelfEsteemState extends State<SelfEsteem> {
 }
 
 itemChecker(var items) {
-  // p =12467
+  // p = 12467
   //n = 358910
   if (items == 1 || items == 2 || items == 4 || items == 6 || items == 7) {
     return Items.selfEsteemScaleP;
+  } else if (items == 3 ||
+      items == 5 ||
+      items == 8 ||
+      items == 9 ||
+      items == 10) {
+    return Items.selfEsteemScaleN;
   }
-  return Items.selfEsteemScaleN;
 }

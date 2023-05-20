@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '/items/items.dart';
 import '/screens/internet_addiction_result.dart';
 import '../models/result_model.dart';
+import '../widgets/item_card.dart';
 import '../widgets/loading.dart';
-import '../widgets/question_card.dart';
 
 class InternetAddiction extends StatefulWidget {
   const InternetAddiction({Key? key}) : super(key: key);

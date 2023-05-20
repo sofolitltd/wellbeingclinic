@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '/items/items.dart';
 import '/models/result_model.dart';
 import '/screens/wellbeing_result.dart';
+import '../widgets/item_card.dart';
 import '../widgets/loading.dart';
-import '../widgets/question_card.dart';
 
 class Wellbeing extends StatefulWidget {
   const Wellbeing({Key? key}) : super(key: key);

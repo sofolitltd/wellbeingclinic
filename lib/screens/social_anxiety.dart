@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '/items/items.dart';
 import '/models/result_model.dart';
 import '/screens/social_anxiety_result.dart';
+import '../widgets/item_card.dart';
 import '../widgets/loading.dart';
-import '../widgets/question_card.dart';
 
 class SocialAnxiety extends StatefulWidget {
   const SocialAnxiety({Key? key}) : super(key: key);

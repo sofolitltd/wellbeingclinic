@@ -68,7 +68,7 @@ class SelfEsteemResult extends StatelessWidget {
                     child: Text(
                       resultModel.subtitle,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontFamily: 'tiro',
+                            fontFamily: 'hindSiliguri',
                           ),
                       textAlign: TextAlign.center,
                     ),

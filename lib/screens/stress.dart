@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:wellbeingclinic/screens/stree_result.dart';
+import 'package:wellbeingclinic/screens/stress_result.dart';
 
 import '/items/items.dart';
 import '/models/result_model.dart';
+import '../widgets/item_card.dart';
 import '../widgets/loading.dart';
-import '../widgets/question_card.dart';
 
 class Stress extends StatefulWidget {
   const Stress({Key? key}) : super(key: key);
