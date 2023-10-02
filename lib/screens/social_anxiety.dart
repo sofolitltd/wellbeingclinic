@@ -97,15 +97,15 @@ class _SocialAnxietyState extends State<SocialAnxiety> {
                             String title = '';
                             String subtitle = '';
                             if (result.clamp(0, 1) == result) {
-                              title = 'Low  social anxiety';
+                              title = 'Low';
                               subtitle =
                                   'সামাজিক পরিবেশে আপনি খুব বেশি অসস্তি অনুভব করেন না। আপনি অন্যদের সাথে যোগাযোগ স্থাপন করতে পারেন। আত্মবিশ্বাসী থাকেন।';
                             } else if (result.clamp(2, 11) == result) {
-                              title = 'Average  social anxiety';
+                              title = 'Average';
                               subtitle =
                                   'সামাজিক পরিবেশে আপনি কিছুটা বিচলিত অনুভব করেন। মেপে কথা বলার চেষ্টা করেন।আপনার মনে হয় আশেপাশের মানুষ আপনাকে নিয়ে নেতিবাচক মন্তব্য করে তাই আপনি আত্মসচেতন থাকার চেষ্টা করেন।';
                             } else if (result >= 12) {
-                              title = 'High  social anxiety';
+                              title = 'High';
                               subtitle =
                                   'সামাজিক পরিবেশে আপনি অসস্তি অনুভব করেন। ভীড় বা জনসমাগম এড়িয়ে চলার চেষ্টা করেন। নিজেকে গুটিয়ে রাখার চেষ্টা করেন।';
                             }

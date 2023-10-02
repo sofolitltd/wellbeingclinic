@@ -96,18 +96,18 @@ class _InternetAddictionState extends State<InternetAddiction> {
                             String subtitle = '';
 
                             if (sum.clamp(18, 35) == sum) {
-                              title = 'Your are - Minimal User';
+                              title = 'Minimal User';
                               subtitle =
                                   'আপনার ইন্টারনেট আসক্তি নেই। আপনার ইন্টারনেট ব্যবহারের উপর পূর্ণ নিয়ন্ত্রণ রয়েছে।';
                             } else if (sum.clamp(36, 62) == sum) {
-                              print('Moderate users');
-                              title = 'Your are - Moderate User';
+                              print('Moderate user');
+                              title = 'Moderate User';
                               subtitle =
                                   'আপনি প্রয়োজনের তুলনায় কিছুটা বেশি সময় ইন্টারনেটে ব্যয় করে থাকেন। যা পরবর্তীতে আসক্তি তে রুপান্তরিত হতে পারে।';
                             }
                             if (sum.clamp(63, 90) == sum) {
-                              print('Excessive users');
-                              title = 'Your are - Excessive User';
+                              print('Excessive user');
+                              title = 'Excessive User';
                               subtitle =
                                   'আপনার ইন্টারনেট আসক্তি বিদ্যমান। আপনি প্রয়োজনের চেয়ে বেশি ইন্টারনেট ব্যবহার করে থাকেন,যা আপনার দৈনন্দিন জীবনে নেতিবাচক প্রভাব ফেলছে।';
                             }

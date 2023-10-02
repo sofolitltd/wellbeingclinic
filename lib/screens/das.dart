@@ -134,41 +134,41 @@ class _DASState extends State<DAS> {
 
                             //depression
                             if (sum1.clamp(0, 9) == sum1) {
-                              depression = 'Normal-$sum1';
+                              depression = 'Normal($sum1)';
                             } else if (sum1.clamp(10, 13) == sum1) {
-                              depression = 'Mild-$sum1';
+                              depression = 'Mild($sum1)';
                             } else if (sum1.clamp(14, 20) == sum1) {
-                              depression = 'Moderate-$sum1';
+                              depression = 'Moderate($sum1)';
                             } else if (sum1.clamp(21, 27) == sum1) {
-                              depression = 'Severe-$sum1';
+                              depression = 'Severe($sum1)';
                             } else if (sum1 >= 28) {
-                              depression = 'Extremely Severe-$sum1';
+                              depression = 'Extremely Severe($sum1)';
                             }
 
                             //anxiety
                             if (sum2.clamp(0, 7) == sum2) {
-                              anxiety = 'Normal-$sum2';
+                              anxiety = 'Normal($sum2)';
                             } else if (sum2.clamp(8, 9) == sum2) {
-                              anxiety = 'Mild-$sum2';
+                              anxiety = 'Mild($sum2)';
                             } else if (sum2.clamp(10, 14) == sum2) {
-                              anxiety = 'Moderate-$sum2';
+                              anxiety = 'Moderate($sum2)';
                             } else if (sum2.clamp(15, 19) == sum2) {
-                              anxiety = 'Severe-$sum2';
+                              anxiety = 'Severe($sum2)';
                             } else if (sum2 >= 20) {
-                              anxiety = 'Extremely Severe-$sum2';
+                              anxiety = 'Extremely Severe($sum2)';
                             }
 
                             //stress
                             if (sum3.clamp(0, 14) == sum3) {
-                              stress = 'Normal-$sum3';
+                              stress = 'Normal($sum3)';
                             } else if (sum3.clamp(15, 18) == sum3) {
-                              stress = 'Mild-$sum3';
+                              stress = 'Mild($sum3)';
                             } else if (sum3.clamp(19, 25) == sum3) {
-                              stress = 'Moderate-$sum3';
+                              stress = 'Moderate($sum3)';
                             } else if (sum3.clamp(26, 33) == sum3) {
-                              stress = 'Severe-$sum3';
+                              stress = 'Severe($sum3)';
                             } else if (sum3 >= 34) {
-                              stress = 'Extremely Severe-$sum3';
+                              stress = 'Extremely Severe($sum3)';
                             }
 
                             //

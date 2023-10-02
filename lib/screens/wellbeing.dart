@@ -96,18 +96,18 @@ class _WellbeingState extends State<Wellbeing> {
                             String title = '';
                             String subtitle = '';
                             if (result < 50) {
-                              title = 'Your wellbeing score is - Low';
+                              title = 'Low';
                               subtitle =
-                                  'আপনার Wellbeing স্কোর নির্দেশ করছে আপনি মানসিক ভাবে বিষন্ন অনুভব করছে। আপনার দৈনন্দিন কাজে আগ্রহ কমে যাচ্ছে। নিজেকে অসুখী অনুভব করছেন।';
+                                  'Low Wellbeing স্কোর নির্দেশ করছে আপনি মানসিক ভাবে বিষন্ন অনুভব করছে। আপনার দৈনন্দিন কাজে আগ্রহ কমে যাচ্ছে। নিজেকে অসুখী অনুভব করছেন।';
                             } else if (result.clamp(50, 75) == result) {
                               title =
-                                  'Your wellbeing score is - Medium/ Moderate';
+                                  'Moderate';
                               subtitle =
-                                  'আপনার Wellbeing স্কোর নির্দেশ করছে আপনি মানসিক ভাবে কিছুটা প্রফুল্ল, তবে দৈনন্দিন কাজ এবং জীবন নিয়ে আপনি সম্পুর্ণ ভাবে সন্তুষ্ট নন।';
+                                  'Moderate Wellbeing স্কোর নির্দেশ করছে আপনি মানসিক ভাবে কিছুটা প্রফুল্ল, তবে দৈনন্দিন কাজ এবং জীবন নিয়ে আপনি সম্পুর্ণ ভাবে সন্তুষ্ট নন।';
                             } else if (result > 75) {
-                              title = 'Your wellbeing score is - High';
+                              title = 'High';
                               subtitle =
-                                  'আপনার Wellbeing স্কোর নির্দেশ করছে আপনি মানসিক ভাবে প্রফুল্ল, সতেজ এবং আপনার দৈনন্দিন কাজে স্বতস্ফুর্ত।';
+                                  'High Wellbeing স্কোর নির্দেশ করছে আপনি মানসিক ভাবে প্রফুল্ল, সতেজ এবং আপনার দৈনন্দিন কাজে স্বতস্ফুর্ত।';
                             }
 
                             setState(() => _inProgress = true);

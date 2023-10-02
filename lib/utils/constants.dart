@@ -7,3 +7,6 @@ const Color kBlueColor = Color(0xffCDE2F3);
 const Color kPinkColor = Color(0xffFFEEE4);
 const Color kLightBlueColor = Color(0xffF1F4F9);
 const Color kMediumBlueColor = Color(0xffbddef1);
+
+const String kFacebookPage = 'https://facebook.com/wellbeingclinicbd';
+const String kContact = 'https://wellbeingclinicbd.blogspot.com/p/contact.html';
