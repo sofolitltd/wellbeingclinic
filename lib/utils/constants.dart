@@ -8,5 +8,7 @@ const Color kPinkColor = Color(0xffFFEEE4);
 const Color kLightBlueColor = Color(0xffF1F4F9);
 const Color kMediumBlueColor = Color(0xffbddef1);
 
-const String kFacebookPage = 'https://facebook.com/wellbeingclinicbd';
-const String kContact = 'https://wellbeingclinicbd.blogspot.com/p/contact.html';
+const String kFacebook = 'https://facebook.com/wellbeingclinicbd';
+const String kInstagram = 'https://instagram.com/wellbeingclinicbd';
+const String kYoutube = 'https://youtube.com/@wellbeingclinicbd';
+const String kContact = 'https://wellbeingclinic.vercel.app/contact';

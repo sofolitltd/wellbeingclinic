@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wellbeingclinic/utils/constants.dart';
 
-import 'home.dart';
+import '../test_screen.dart';
 
-class DarkTriadResult extends StatelessWidget {
-  const DarkTriadResult({
+class DASResult extends StatelessWidget {
+  const DASResult({
     super.key,
-    required this.machiavellianism,
-    required this.psychopathy,
-    required this.narcissism,
+    required this.depression,
+    required this.anxiety,
+    required this.stress,
   });
 
-  final String machiavellianism;
-  final String psychopathy;
-  final String narcissism;
+  final String depression;
+  final String anxiety;
+  final String stress;
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +22,13 @@ class DarkTriadResult extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Result'),
+          title: const Text('Depression, Anxiety & Stress'),
           centerTitle: true,
-          automaticallyImplyLeading: false,
           bottom: const TabBar(
             tabs: [
-              Tab(text: 'Machiavellianism'),
-              Tab(text: 'Psychopathy'),
-              Tab(text: 'Narcissism'),
+              Tab(text: 'Depression'),
+              Tab(text: 'Anxiety'),
+              Tab(text: 'Stress'),
 
             ],
           ),
@@ -50,49 +49,73 @@ class DarkTriadResult extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: TabBarView(
                     children: [
-                      //mc
-                      DarkTriadCard(
-                        title: 'Machiavellianism',
-                        result: machiavellianism,
-                        description:
-                            'ম্যাকিয়াভেলিয়ানিজম হল একটি ব্যক্তিত্বের বৈশিষ্ট্য যা ধূর্ততা, কারসাজি এবং মানব প্রকৃতির কুৎসিত দৃষ্টিভঙ্গি দ্বারা চিহ্নিত করা হয়।',
-                        subtitle: '* ম্যাকিয়াভেলিয়ানদের প্রায়ই ঠান্ডা, গণনাকারী এবং নির্দয় হিসাবে দেখা হয়।\n* ম্যাকিয়াভেলিয়ানরা লোকেদের পড়তে এবং তারা যা চায় তা পাওয়ার জন্য তাদের কৌশলে দক্ষ।\n* ম্যাকিয়াভেলিয়ানরা প্রায়শই নিষ্ঠুর এবং অন্যদের প্রতি অবিশ্বাসী।\n* ম্যাকিয়াভেলিয়ানিজম প্রায়শই ব্যক্তিত্বের বৈশিষ্ট্যের \'Dark Triad\'-এর সাথে যুক্ত।',
+                      //dep
+                      DasCard(
+                        title: 'Depression',
+                        result: depression,
+                        description: '0-9    =  Normal'
+                            '\n10-13  =  Mild'
+                            '\n14-20 =  Moderate'
+                            '\n21-27  =  Severe'
+                            '\n28+    =  Extremely Severe',
+                        subtitle: 'Depression বা "বিষণ্ণতা" একটি প্রচলিত এবং মারাত্মক মানসিক অসুস্থতা যা অনুভূতি, চিন্তা এবং আচরণকে নেতিবাচকভাবে প্রভাবিত করে।',
                         color: kGreenColor,
                       ),
 
+
                       //psy
-                      DarkTriadCard(
-                        title: 'Psychopathy',
-                        result: psychopathy,
-                        description:
-                            'সাইকোপ্যাথি একটি মানসিক ব্যাধি যা সহানুভূতি, অনুশোচনা এবং অপরাধবোধের অভাব দ্বারা চিহ্নিত করা হয়।',
-                        subtitle: '* সাইকোপ্যাথরা প্রায়ই কৌশলী হয়, যা তাদের সনাক্ত করা কঠিন করে তোলে।\n* তারা স্বাভাবিক মানুষের মতো মনে হতে পারে, কিন্তু তাদের সহানুভূতি এবং অনুশোচনার অভাব রয়েছে, যা বিপজ্জনক এবং ধ্বংসাত্মক আচরণের দিকে নিয়ে যেতে পারে।\n* এটা মনে রাখা গুরুত্বপূর্ণ যে সাইকোপ্যাথি একটি গুরুতর মানসিক ব্যাধি এবং যাদের এটি আছে তারা খারাপ মানুষ নয়। তারা কেবল এমন একটি শর্তের সাথে লড়াই করছে যা তাদের পক্ষে সমাজে কাজ করা কঠিন তুল পারে।',
+                      DasCard(
+                        title: 'Anxiety',
+                        result: anxiety,
+                        description: '0-7    =   Normal'
+                            '\n8-9    =   Mild'
+                            '\n10-14  =  Moderate'
+                            '\n15-19  =  Severe'
+                            '\n20+    =  Extremely Severe',
+                        subtitle: 'Anxiety বা "উদ্বেগ" হলো কতগুলো মানসিক অসুস্থতার সমষ্টি যা মর্মপীড়া, যন্ত্রণা বা বেদনার সৃষ্টি করে স্বাভাবিক জীবনযাপনকে ব্যাহত করে।',
                         color: kPinkColor,
                       ),
 
                       //nar
-                      DarkTriadCard(
-                        title: 'Narcissism',
-                        result: narcissism,
-                        description:
-                            'নার্সিসিজম হল একটি ব্যক্তিত্বের বৈশিষ্ট্য যা অত্যধিক আত্ম-প্রেম এবং নিজের ইচ্ছা, চাহিদা এবং কৃতিত্ব নিয়ে ব্যস্ততা দ্বারা চিহ্নিত করা হয়।',
-                        subtitle: '*নার্সিসিস্টিক বৈশিষ্ট্যযুক্ত ব্যক্তিদের প্রায়শই তাদের নিজস্ব গুরুত্বের একটি অতিরঞ্জিত বোধ, ক্রমাগত প্রশংসার প্রয়োজন এবং অন্যদের প্রতি সহানুভূতির অভাব থাকে।\n* নার্সিসিস্টিক ব্যক্তিরা তাদের আচরণে প্রায়শই হেরফের, অহংকার এবং অন্যের অনুভূতির প্রতি অবজ্ঞা করে থাকে।\n* তারা সমালোচনা বা প্রত্যাখ্যানের সাথেও লড়াই করতে পারে়।',
+                      DasCard(
+                        title: 'Stress',
+                        result: stress,
+                        description: '0-14   =  Normal'
+                            '\n15-18  =  Mild'
+                            '\n19-25  =  Moderate'
+                            '\n26-33  =  Severe'
+                            '\n34+     =  Extremely Severe',
+                        subtitle: 'Stress বা "চাপ" একটি শারীরিক, মানসিক, বা আবেগময় বিষয় যা দৈহিক বা মানসিক দুশ্চিন্তার কারণ হয়ে দাঁড়ায়।',
                         color: kBlueColor,
                       ),
                     ],
                   ),
                 ),
               ),
+
+              // back to test
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Home()),
-                          (route) => false);
-                    },
-                    child: Text("Back to All Tests".toUpperCase())),
+                padding: const EdgeInsets.symmetric(vertical: 32),
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child:  Text("Test again".toUpperCase())),
+
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                          child: Text("Back to All Tests".toUpperCase())),
+                    ),
+
+                  ],
+                ),
               ),
             ],
           ),
@@ -102,8 +125,8 @@ class DarkTriadResult extends StatelessWidget {
   }
 }
 
-class DarkTriadCard extends StatelessWidget {
-  const DarkTriadCard({
+class DasCard extends StatelessWidget {
+  const DasCard({
     super.key,
     required this.title,
     required this.result,
@@ -161,9 +184,9 @@ class DarkTriadCard extends StatelessWidget {
                       result.toUpperCase(),
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        height: 1.4,
-                      ),
+                            fontWeight: FontWeight.bold,
+                            height: 1.4,
+                          ),
                     ),
                   ],
                 ),
@@ -175,8 +198,8 @@ class DarkTriadCard extends StatelessWidget {
                 child: Text(
                   description,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontFamily: 'hindSiliguri',
-                  ),
+                        fontFamily: 'hindSiliguri',
+                      ),
                 ),
               ),
             ],
@@ -232,7 +255,7 @@ class DarkTriadCard extends StatelessWidget {
             Expanded(
               child: InkWell(
                 onTap: () async {
-                  const url = kFacebookPage;
+                  const url = kFacebook;
 
                   if (!await launchUrl(
                     Uri.parse(url),
@@ -299,9 +322,9 @@ class DarkTriadCard extends StatelessWidget {
                   ),
                 ),
                 padding: const EdgeInsets.symmetric(
-                    vertical: 12, horizontal: 16),
+                    vertical: 12, horizontal: 20),
                 child: Text(
-                  'Contact Us',
+                  'Contact now',
                   style:
                   Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontFamily: 'hindSiliguri',

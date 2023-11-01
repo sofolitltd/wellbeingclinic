@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:wellbeingclinic/screens/stress_result.dart';
 
+import '../../widgets/item_card.dart';
+import '../../widgets/loading.dart';
 import '/items/items.dart';
 import '/models/result_model.dart';
-import '../widgets/item_card.dart';
-import '../widgets/loading.dart';
+
+import 'stress_result.dart';
 
 class Stress extends StatefulWidget {
-  const Stress({Key? key}) : super(key: key);
+  const Stress({super.key});
 
   @override
   State<Stress> createState() => _StressState();

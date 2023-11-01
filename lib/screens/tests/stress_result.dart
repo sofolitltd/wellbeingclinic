@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../models/result_model.dart';
-import 'home.dart';
+import '../../models/result_model.dart';
+
+import 'test_screen.dart';
 
 class StressResult extends StatelessWidget {
-  const StressResult({Key? key, required this.resultModel}) : super(key: key);
+  const StressResult({super.key, required this.resultModel});
 
   final ResultModel resultModel;
 
@@ -79,7 +80,7 @@ class StressResult extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => const Home()),
+                      MaterialPageRoute(builder: (context) => const TestScreen()),
                       (route) => false);
                 },
                 child: Text("Back to All Tests".toUpperCase())),

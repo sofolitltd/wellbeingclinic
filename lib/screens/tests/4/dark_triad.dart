@@ -1,10 +1,11 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../../../widgets/item_card.dart';
 import '/items/items.dart';
-import '../widgets/item_card.dart';
-import '../widgets/loading.dart';
+
 import 'dark_triad_result.dart';
 
 class DarkTriad extends StatefulWidget {
@@ -29,9 +30,7 @@ class _DarkTriadState extends State<DarkTriad> {
       ),
 
       //
-      body: _inProgress
-          ? const Loading()
-          : SingleChildScrollView(
+      body: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width > 1000
@@ -66,8 +65,11 @@ class _DarkTriadState extends State<DarkTriad> {
                       },
                     ),
 
-                    //
 
+                    //
+                    const SizedBox(height: 16),
+
+                    //
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 16,
@@ -135,7 +137,7 @@ class _DarkTriadState extends State<DarkTriad> {
 
                             setState(() => _inProgress = true);
 
-                            await Future.delayed(const Duration(seconds: 3))
+                            await Future.delayed(const Duration(seconds: 1))
                                 .then(
                               (value) {
                                 //
@@ -156,7 +158,13 @@ class _DarkTriadState extends State<DarkTriad> {
                             setState(() => _inProgress = false);
                           }
                         },
-                        child: Padding(
+                        child:
+                        _inProgress
+                            ?  const SpinKitThreeBounce(
+                          color: Colors.white,
+                          size: 50,
+                        ):
+                        Padding(
                           padding: const EdgeInsets.all(16),
                           child: Text('Submit now'.toUpperCase()),
                         ),

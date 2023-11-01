@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../../../widgets/item_card.dart';
 import '/items/items.dart';
 import '/models/result_model.dart';
-import '/screens/wellbeing_result.dart';
-import '../widgets/item_card.dart';
-import '../widgets/loading.dart';
+
+import 'wellbeing_result.dart';
 
 class Wellbeing extends StatefulWidget {
-  const Wellbeing({Key? key}) : super(key: key);
+  const Wellbeing({super.key});
 
   @override
   State<Wellbeing> createState() => _WellbeingState();
@@ -28,9 +29,7 @@ class _WellbeingState extends State<Wellbeing> {
       ),
 
       //
-      body: _inProgress
-          ? const Loading()
-          : SingleChildScrollView(
+      body: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width > 1000
@@ -64,6 +63,8 @@ class _WellbeingState extends State<Wellbeing> {
                         );
                       },
                     ),
+
+                    const SizedBox(height: 16),
 
                     //
                     Padding(
@@ -112,8 +113,8 @@ class _WellbeingState extends State<Wellbeing> {
 
                             setState(() => _inProgress = true);
 
-                            //
-                            await Future.delayed(const Duration(seconds: 3))
+                            // //
+                            await Future.delayed(const Duration(seconds: 1))
                                 .then((value) {
                               //
                               Navigator.pushReplacement(
@@ -134,7 +135,12 @@ class _WellbeingState extends State<Wellbeing> {
                           //
                           setState(() => _inProgress = false);
                         },
-                        child: Padding(
+                        child: _inProgress
+                            ?  const SpinKitThreeBounce(
+                          color: Colors.white,
+                          size: 50,
+                        )
+                            : Padding(
                           padding: const EdgeInsets.all(16),
                           child: Text('Submit now'.toUpperCase()),
                         ),

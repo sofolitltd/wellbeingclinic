@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../../../widgets/item_card.dart';
 import '/items/items.dart';
-import '/screens/internet_addiction_result.dart';
-import '../models/result_model.dart';
-import '../widgets/item_card.dart';
-import '../widgets/loading.dart';
+import '/models/result_model.dart';
 
-class InternetAddiction extends StatefulWidget {
-  const InternetAddiction({Key? key}) : super(key: key);
+import 'social_anxiety_result.dart';
+
+class SocialAnxiety extends StatefulWidget {
+  const SocialAnxiety({super.key});
 
   @override
-  State<InternetAddiction> createState() => _InternetAddictionState();
+  State<SocialAnxiety> createState() => _SocialAnxietyState();
 }
 
-class _InternetAddictionState extends State<InternetAddiction> {
+class _SocialAnxietyState extends State<SocialAnxiety> {
   Map testAnswer = {};
   bool _inProgress = false;
 
@@ -23,14 +24,12 @@ class _InternetAddictionState extends State<InternetAddiction> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'Internet Addiction Scale',
+          'Social Anxiety',
         ),
       ),
 
       //
-      body: _inProgress
-          ? const Loading()
-          : SingleChildScrollView(
+      body: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width > 1000
@@ -42,7 +41,7 @@ class _InternetAddictionState extends State<InternetAddiction> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      Items.internetAddictionInstruction,
+                      Items.socialAnxietyInstruction,
                       style: const TextStyle(fontFamily: 'tiro'),
                     ),
 
@@ -54,16 +53,18 @@ class _InternetAddictionState extends State<InternetAddiction> {
                           const SizedBox(height: 16),
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: Items.internetAddictionItems.length,
+                      itemCount: Items.socialAnxietyItems.length,
                       itemBuilder: (context, index) {
                         return ItemCard(
                           index: index,
-                          testItems: Items.internetAddictionItems,
-                          testScale: Items.internetAddictionScale,
+                          testItems: Items.socialAnxietyItems,
+                          testScale: Items.socialAnxietyScale,
                           testAnswer: testAnswer,
                         );
                       },
                     ),
+
+                    const SizedBox(height: 16),
 
                     //
                     Padding(
@@ -86,45 +87,42 @@ class _InternetAddictionState extends State<InternetAddiction> {
                           print(sum);
 
                           if ((testAnswer.length !=
-                              Items.internetAddictionItems.length)) {
+                              Items.socialAnxietyItems.length)) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text('Please fill all items')));
                           } else {
                             //todo: result
+                            var result = sum.round();
+
                             String title = '';
                             String subtitle = '';
-
-                            if (sum.clamp(18, 35) == sum) {
-                              title = 'Minimal User';
+                            if (result.clamp(0, 1) == result) {
+                              title = 'Low';
                               subtitle =
-                                  'আপনার ইন্টারনেট আসক্তি নেই। আপনার ইন্টারনেট ব্যবহারের উপর পূর্ণ নিয়ন্ত্রণ রয়েছে।';
-                            } else if (sum.clamp(36, 62) == sum) {
-                              print('Moderate user');
-                              title = 'Moderate User';
+                                  'সামাজিক পরিবেশে আপনি খুব বেশি অসস্তি অনুভব করেন না। আপনি অন্যদের সাথে যোগাযোগ স্থাপন করতে পারেন। আত্মবিশ্বাসী থাকেন।';
+                            } else if (result.clamp(2, 11) == result) {
+                              title = 'Average';
                               subtitle =
-                                  'আপনি প্রয়োজনের তুলনায় কিছুটা বেশি সময় ইন্টারনেটে ব্যয় করে থাকেন। যা পরবর্তীতে আসক্তি তে রুপান্তরিত হতে পারে।';
-                            }
-                            if (sum.clamp(63, 90) == sum) {
-                              print('Excessive user');
-                              title = 'Excessive User';
+                                  'সামাজিক পরিবেশে আপনি কিছুটা বিচলিত অনুভব করেন। মেপে কথা বলার চেষ্টা করেন।আপনার মনে হয় আশেপাশের মানুষ আপনাকে নিয়ে নেতিবাচক মন্তব্য করে তাই আপনি আত্মসচেতন থাকার চেষ্টা করেন।';
+                            } else if (result >= 12) {
+                              title = 'High';
                               subtitle =
-                                  'আপনার ইন্টারনেট আসক্তি বিদ্যমান। আপনি প্রয়োজনের চেয়ে বেশি ইন্টারনেট ব্যবহার করে থাকেন,যা আপনার দৈনন্দিন জীবনে নেতিবাচক প্রভাব ফেলছে।';
+                                  'সামাজিক পরিবেশে আপনি অসস্তি অনুভব করেন। ভীড় বা জনসমাগম এড়িয়ে চলার চেষ্টা করেন। নিজেকে গুটিয়ে রাখার চেষ্টা করেন।';
                             }
 
                             setState(() => _inProgress = true);
 
-                            await Future.delayed(const Duration(seconds: 3))
+                            await Future.delayed(const Duration(seconds: 1))
                                 .then(
                               (value) {
                                 //
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        InternetAddictionResult(
+                                    builder: (context) => SocialAnxietyResult(
                                       resultModel: ResultModel(
-                                        sum: sum,
+                                        sum: result.toDouble(),
                                         title: title,
                                         subtitle: subtitle,
                                       ),
@@ -138,7 +136,14 @@ class _InternetAddictionState extends State<InternetAddiction> {
                             setState(() => _inProgress = false);
                           }
                         },
-                        child: Padding(
+                        child:
+                        _inProgress
+                            ?  const SpinKitThreeBounce(
+                          color: Colors.white,
+                          size: 50,
+                        )
+                            :
+                        Padding(
                           padding: const EdgeInsets.all(16),
                           child: Text('Submit now'.toUpperCase()),
                         ),

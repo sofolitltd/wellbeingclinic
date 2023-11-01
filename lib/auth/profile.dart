@@ -20,7 +20,8 @@ class Profile extends StatelessWidget {
           width: 100,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-          color: Colors.blueAccent.shade100,
+              border: Border.all(color: Colors.blueGrey),
+          color: Colors.grey.shade50,
             image: DecorationImage(
               fit: BoxFit.cover,
               image: NetworkImage(currentUser.photoURL!)
@@ -45,7 +46,7 @@ class Profile extends StatelessWidget {
               onPressed: () async {
                 await authService.handleSignOut().then((value) =>
                     Navigator.pushNamedAndRemoveUntil(
-                        context, '/login', (route) => false));
+                        context, '/', (route) => false));
               },
               icon: const Icon(Icons.logout_sharp),
             ),

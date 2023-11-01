@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../models/result_model.dart';
-import '../utils/constants.dart';
-import 'home.dart';
+import '/models/result_model.dart';
+import '/utils/constants.dart';
 
-class InternetAddictionResult extends StatelessWidget {
-  const InternetAddictionResult({Key? key, required this.resultModel})
-      : super(key: key);
+import '/screens/tests/test_screen.dart';
+
+class SocialAnxietyResult extends StatelessWidget {
+  const SocialAnxietyResult({super.key, required this.resultModel});
 
   final ResultModel resultModel;
 
@@ -15,9 +15,8 @@ class InternetAddictionResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Result'),
+        title: const Text('Social Anxiety'),
         centerTitle: true,
-        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -42,14 +41,15 @@ class InternetAddictionResult extends StatelessWidget {
                       strokeWidth: 16,
                       color: Colors.red,
                       backgroundColor: Colors.blue.shade100,
-                      value: resultModel.sum / 90,
+                      value: resultModel.sum / 28,
                     ),
                   ),
 
                   const SizedBox(height: 24),
 
                   Text(
-                    'You are',
+
+                  'Your Social Anxiety',
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
@@ -64,13 +64,15 @@ class InternetAddictionResult extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       fontWeight: FontWeight.bold,
                       height: 1.4,
-                      color: resultModel.title == 'Minimal User'
+                      color: resultModel.title == 'Low'
                           ? Colors.green
-                          : resultModel.title == 'Moderate User'
+                          : resultModel.title == 'Average'
                           ? Colors.orange
                           : Colors.red,
                     ),
                   ),
+
+                  //
                   const SizedBox(height: 16),
 
                   Container(
@@ -118,7 +120,7 @@ class InternetAddictionResult extends StatelessWidget {
                       Expanded(
                         child: InkWell(
                           onTap: () async {
-                            const url = kFacebookPage;
+                            const url = kFacebook;
 
                             if (!await launchUrl(
                               Uri.parse(url),
@@ -185,9 +187,9 @@ class InternetAddictionResult extends StatelessWidget {
                             ),
                           ),
                           padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 16),
+                              vertical: 12, horizontal: 20),
                           child: Text(
-                            'Contact Us',
+                            'Contact now',
                             style:
                             Theme.of(context).textTheme.bodyLarge!.copyWith(
                               fontFamily: 'hindSiliguri',
@@ -202,14 +204,30 @@ class InternetAddictionResult extends StatelessWidget {
               ),
             ),
 
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Home()),
-                      (route) => false);
-                },
-                child: Text("Back to All Tests".toUpperCase())),
+            // back to test
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Row(
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child:  Text("Test again".toUpperCase())),
+
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: OutlinedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+                        child: Text("Back to All Tests".toUpperCase())),
+                  ),
+
+                ],
+              ),
+            ),
           ],
         ),
       ),

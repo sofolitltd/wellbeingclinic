@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../screens/home.dart';
+import '../screens/tests/test_screen.dart';
+
 
 class TestCard extends StatelessWidget {
   const TestCard({
@@ -53,17 +54,19 @@ class TestCard extends StatelessWidget {
                           ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      test.description,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                            wordSpacing: 1.2,
-                            height: 1.3,
-                            letterSpacing: .2,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.blueGrey,
-                          ),
+                    Expanded(
+                      child: Text(
+                        test.description,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                              wordSpacing: 1.2,
+                              height: 1.3,
+                              letterSpacing: .2,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.blueGrey,
+                            ),
+                      ),
                     ),
                   ],
                 ),

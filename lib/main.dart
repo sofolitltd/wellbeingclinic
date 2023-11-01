@@ -1,22 +1,23 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:url_strategy/url_strategy.dart';
+import '/screens/landing_screen.dart';
 import '/auth/profile.dart';
 import '/auth/wrapper.dart';
-import '/screens/das.dart';
-import '/screens/details.dart';
 
-import '/auth/splash.dart';
-import '/screens/dark_triad.dart';
-import '/screens/home.dart';
-import '/screens/internet_addiction.dart';
-import '/screens/self_esteem.dart';
-import '/screens/social_anxiety.dart';
-import '/screens/stress.dart';
-import '/screens/wellbeing.dart';
 import 'auth/login.dart';
+import 'auth/splash.dart';
 import 'firebase_options.dart';
 import 'payment/payment.dart';
+import 'screens/tests/4/dark_triad.dart';
+import 'screens/tests/3/das.dart';
+import '/screens/tests/test_details.dart';
+import 'screens/tests/test_screen.dart';
+import 'screens/tests/6/internet_addiction.dart';
+import 'screens/tests/2/self_esteem.dart';
+import 'screens/tests/5/social_anxiety.dart';
+import '/screens/tests/stress.dart';
+import 'screens/tests/1/wellbeing.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,34 +39,63 @@ class MyApp extends StatelessWidget {
       title: 'Wellbeing Clinic',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
         fontFamily: 'hindSiliguri',
-        appBarTheme:  AppBarTheme(
+        appBarTheme: const AppBarTheme(
           elevation: 0,
-          backgroundColor: Colors.green.shade200,
+          backgroundColor: Colors.white70,
+          iconTheme: IconThemeData(
+            color: Colors.black87,
+          ),
+          titleTextStyle: TextStyle(
+            fontSize: 16,
+            color: Colors.black87,
+            // letterSpacing: 1,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
-          style: OutlinedButton.styleFrom(minimumSize: const Size(100, 48)),
+          style: OutlinedButton.styleFrom(
+            foregroundColor: Colors.black,
+            minimumSize: const Size(100, 56),
+            side: const BorderSide(color: Colors.indigo, width: 1.5),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            textStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+            ),
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            minimumSize: const Size(100, 48),
-            backgroundColor:  Colors.green.shade200,
-            textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1,)
+            minimumSize: const Size(100, 56),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            backgroundColor: Colors.indigo.shade500,
+            textStyle: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+            ),
           ),
+        ),
+        tabBarTheme: const TabBarTheme(
+          labelColor: Colors.black,
+          indicatorColor: Colors.indigo,
         ),
       ),
       // home: const SplashScreen(),
-      initialRoute: '/wrap',
+      initialRoute: '/',
       routes: {
-        '/wrap': (context) => const WrapperScreen(),
+        '/': (context) => const WrapperScreen(),
         '/splash': (context) => const SplashScreen(),
         '/login': (context) => const Login(),
         '/profile': (context) => const Profile(),
-        '/home': (context) => const Home(),
-        '/details': (context) => const Details(),
+        '/main': (context) => const LandingScreen(),
+        '/test': (context) => const TestScreen(),
+        '/details': (context) => const TestDetails(),
         '/payment': (context) => const Payment(),
-
         '/wellbeing': (context) => const Wellbeing(),
         '/self-steam': (context) => const SelfEsteem(),
         '/stress': (context) => const Stress(),

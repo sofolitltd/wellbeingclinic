@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../../../widgets/item_card.dart';
 import '/items/items.dart';
 import '/models/result_model.dart';
-import '/screens/social_anxiety_result.dart';
-import '../widgets/item_card.dart';
-import '../widgets/loading.dart';
 
-class SocialAnxiety extends StatefulWidget {
-  const SocialAnxiety({Key? key}) : super(key: key);
+import '/screens/tests/2/self_esteem_result.dart';
+
+class SelfEsteem extends StatefulWidget {
+  const SelfEsteem({super.key});
 
   @override
-  State<SocialAnxiety> createState() => _SocialAnxietyState();
+  State<SelfEsteem> createState() => _SelfEsteemState();
 }
 
-class _SocialAnxietyState extends State<SocialAnxiety> {
+class _SelfEsteemState extends State<SelfEsteem> {
   Map testAnswer = {};
   bool _inProgress = false;
 
@@ -23,14 +24,12 @@ class _SocialAnxietyState extends State<SocialAnxiety> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'Social Anxiety',
+          'Self Esteem Scale',
         ),
       ),
 
       //
-      body: _inProgress
-          ? const Loading()
-          : SingleChildScrollView(
+      body: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width > 1000
@@ -42,7 +41,7 @@ class _SocialAnxietyState extends State<SocialAnxiety> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      Items.socialAnxietyInstruction,
+                      Items.selfEsteemInstruction,
                       style: const TextStyle(fontFamily: 'tiro'),
                     ),
 
@@ -54,16 +53,19 @@ class _SocialAnxietyState extends State<SocialAnxiety> {
                           const SizedBox(height: 16),
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: Items.socialAnxietyItems.length,
+                      itemCount: Items.selfEsteemItems.length,
                       itemBuilder: (context, index) {
                         return ItemCard(
                           index: index,
-                          testItems: Items.socialAnxietyItems,
-                          testScale: Items.socialAnxietyScale,
+                          testItems: Items.selfEsteemItems,
+                          testScale:
+                              itemChecker(Items.selfEsteemItems[index].id),
                           testAnswer: testAnswer,
                         );
                       },
                     ),
+
+                    const SizedBox(height: 16),
 
                     //
                     Padding(
@@ -86,40 +88,42 @@ class _SocialAnxietyState extends State<SocialAnxiety> {
                           print(sum);
 
                           if ((testAnswer.length !=
-                              Items.socialAnxietyItems.length)) {
+                              Items.selfEsteemItems.length)) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text('Please fill all items')));
                           } else {
                             //todo: result
+                            //1,2,4,6,7 +
+                            //3,5,8,9,10 -
                             var result = sum.round();
 
                             String title = '';
                             String subtitle = '';
-                            if (result.clamp(0, 1) == result) {
+                            if (result < 15) {
                               title = 'Low';
                               subtitle =
-                                  'সামাজিক পরিবেশে আপনি খুব বেশি অসস্তি অনুভব করেন না। আপনি অন্যদের সাথে যোগাযোগ স্থাপন করতে পারেন। আত্মবিশ্বাসী থাকেন।';
-                            } else if (result.clamp(2, 11) == result) {
-                              title = 'Average';
+                                  'আপনি আত্মবিশ্বাসহীনতায় ভুগেন, নিজের প্রতি নেতিবাচক ধারনা রাখেন।আপনার নিজের কর্মদক্ষতা নিয়ে আপনি সন্দিহান থাকেন। নতুন চ্যালেঞ্জ গ্রহণ করতে পছন্দ করেন না। কিছুসময় আপনি নিজেকে গুটিয়ে রাখতে পছন্দ করেন।';
+                            } else if (result.clamp(15, 25) == result) {
+                              title = 'Normal';
                               subtitle =
-                                  'সামাজিক পরিবেশে আপনি কিছুটা বিচলিত অনুভব করেন। মেপে কথা বলার চেষ্টা করেন।আপনার মনে হয় আশেপাশের মানুষ আপনাকে নিয়ে নেতিবাচক মন্তব্য করে তাই আপনি আত্মসচেতন থাকার চেষ্টা করেন।';
-                            } else if (result >= 12) {
+                                  'আপনি আত্মবিশ্বাসী। দৈনন্দিন জীবনের কিছু পরিস্থিতিতে আপনি কিছুটা বিচলিত অনুভব করলেও পরবর্তীতে তা সম্পন্ন করতে পারেন। আপনি অতিরিক্ত চিন্তা বা দুশ্চিন্তা করতে পছন্দ করেন না। আপনি আপনার পারিপার্শ্বিক মানুষকে ইতিবাচক ভাবে গ্রহণ করেন,সুসম্পর্ক বজায় রাখেন।';
+                            } else if (result > 25) {
                               title = 'High';
                               subtitle =
-                                  'সামাজিক পরিবেশে আপনি অসস্তি অনুভব করেন। ভীড় বা জনসমাগম এড়িয়ে চলার চেষ্টা করেন। নিজেকে গুটিয়ে রাখার চেষ্টা করেন।';
+                                  'আপনি একজন আত্মবিশ্বাসী মানুষ। নিজেকে নিয়ে আপনি ইতিবাচক মনোভাব রাখেন।দৈনন্দিন কাজ সম্পাদন করার জন্য আপনি বিচলিত হোন না।আপনি আত্মমর্যাদা অনুভব করে থাকেন। আপনি যেমন আছেন নিজেকে সেইভাবেই গ্রহণ করতে পারেন। আপনি নতুন চ্যালেঞ্জ গ্রহণ করতে ভালোবাসেন।';
                             }
 
+                            //
                             setState(() => _inProgress = true);
-
-                            await Future.delayed(const Duration(seconds: 3))
+                            await Future.delayed(const Duration(seconds: 1))
                                 .then(
                               (value) {
                                 //
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => SocialAnxietyResult(
+                                    builder: (context) => SelfEsteemResult(
                                       resultModel: ResultModel(
                                         sum: result.toDouble(),
                                         title: title,
@@ -135,7 +139,14 @@ class _SocialAnxietyState extends State<SocialAnxiety> {
                             setState(() => _inProgress = false);
                           }
                         },
-                        child: Padding(
+                        child:
+                        _inProgress
+                            ?  const SpinKitThreeBounce(
+                          color: Colors.white,
+                          size: 50,
+                        )
+                            :
+                        Padding(
                           padding: const EdgeInsets.all(16),
                           child: Text('Submit now'.toUpperCase()),
                         ),
@@ -146,5 +157,19 @@ class _SocialAnxietyState extends State<SocialAnxiety> {
               ),
             ),
     );
+  }
+}
+
+itemChecker(var items) {
+  // p = 12467
+  //n = 358910
+  if (items == 1 || items == 2 || items == 4 || items == 6 || items == 7) {
+    return Items.selfEsteemScaleP;
+  } else if (items == 3 ||
+      items == 5 ||
+      items == 8 ||
+      items == 9 ||
+      items == 10) {
+    return Items.selfEsteemScaleN;
   }
 }

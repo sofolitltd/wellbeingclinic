@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../models/result_model.dart';
-import '../utils/constants.dart';
-import 'home.dart';
+import '/models/result_model.dart';
+import '/utils/constants.dart';
+import '/screens/tests/test_screen.dart';
 
-class SelfEsteemResult extends StatelessWidget {
-  const SelfEsteemResult({Key? key, required this.resultModel})
-      : super(key: key);
+class InternetAddictionResult extends StatelessWidget {
+  const InternetAddictionResult({super.key, required this.resultModel});
 
   final ResultModel resultModel;
 
@@ -15,9 +14,8 @@ class SelfEsteemResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Result'),
+        title: const Text('Internet Addiction'),
         centerTitle: true,
-        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -30,6 +28,7 @@ class SelfEsteemResult extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            //
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: Column(
@@ -41,37 +40,35 @@ class SelfEsteemResult extends StatelessWidget {
                       strokeWidth: 16,
                       color: Colors.red,
                       backgroundColor: Colors.blue.shade100,
-                      value: resultModel.sum / 30,
+                      value: resultModel.sum / 90,
                     ),
                   ),
 
                   const SizedBox(height: 24),
 
                   Text(
-                    'Your Self-esteem is',
+                    'You are',
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
-                  //
 
+                  //
                   Text(
                     resultModel.title.toUpperCase(),
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       fontWeight: FontWeight.bold,
                       height: 1.4,
-                      color: resultModel.title == 'Low'
-                          ? Colors.red
-                          : resultModel.title == 'Normal'
+                      color: resultModel.title == 'Minimal User'
+                          ? Colors.green
+                          : resultModel.title == 'Moderate User'
                           ? Colors.orange
-                          : Colors.green,
+                          : Colors.red,
                     ),
                   ),
-
-                  //
                   const SizedBox(height: 16),
 
                   Container(
@@ -119,7 +116,7 @@ class SelfEsteemResult extends StatelessWidget {
                       Expanded(
                         child: InkWell(
                           onTap: () async {
-                            const url = kFacebookPage;
+                            const url = kFacebook;
 
                             if (!await launchUrl(
                               Uri.parse(url),
@@ -186,9 +183,9 @@ class SelfEsteemResult extends StatelessWidget {
                             ),
                           ),
                           padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 16),
+                              vertical: 12, horizontal: 20),
                           child: Text(
-                            'Contact Us',
+                            'Contact now',
                             style:
                             Theme.of(context).textTheme.bodyLarge!.copyWith(
                               fontFamily: 'hindSiliguri',
@@ -202,14 +199,31 @@ class SelfEsteemResult extends StatelessWidget {
                 ],
               ),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Home()),
-                      (route) => false);
-                },
-                child: Text("Back to All Tests".toUpperCase())),
+
+            // back to test
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Row(
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child:  Text("Test again".toUpperCase())),
+
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: OutlinedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+                        child: Text("Back to All Tests".toUpperCase())),
+                  ),
+
+                ],
+              ),
+            ),
           ],
         ),
       ),

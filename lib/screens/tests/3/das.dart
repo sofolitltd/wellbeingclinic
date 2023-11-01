@@ -1,11 +1,13 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:wellbeingclinic/screens/das_result.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+
+import '../../../widgets/item_card.dart';
 import '/items/items.dart';
-import '../widgets/item_card.dart';
-import '../widgets/loading.dart';
+
+import 'das_result.dart';
 
 class DAS extends StatefulWidget {
   const DAS({super.key});
@@ -29,9 +31,7 @@ class _DASState extends State<DAS> {
       ),
 
       //
-      body: _inProgress
-          ? const Loading()
-          : SingleChildScrollView(
+      body: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width > 1000
@@ -66,6 +66,7 @@ class _DASState extends State<DAS> {
                       },
                     ),
 
+                    const SizedBox(height: 16),
                     //
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -174,7 +175,7 @@ class _DASState extends State<DAS> {
                             //
                             setState(() => _inProgress = true);
 
-                            await Future.delayed(const Duration(seconds: 3))
+                            await Future.delayed(const Duration(seconds: 1))
                                 .then(
                               (value) {
                                 //
@@ -195,7 +196,13 @@ class _DASState extends State<DAS> {
                             setState(() => _inProgress = false);
                           }
                         },
-                        child: Padding(
+                        child:
+                        _inProgress
+                            ?  const SpinKitThreeBounce(
+                          color: Colors.white,
+                          size: 50,
+                        ):
+                        Padding(
                           padding: const EdgeInsets.all(16),
                           child: Text('Submit now'.toUpperCase()),
                         ),
