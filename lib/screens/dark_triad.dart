@@ -8,7 +8,7 @@ import '../widgets/loading.dart';
 import 'dark_triad_result.dart';
 
 class DarkTriad extends StatefulWidget {
-  const DarkTriad({Key? key}) : super(key: key);
+  const DarkTriad({super.key});
 
   @override
   State<DarkTriad> createState() => _DarkTriadState();

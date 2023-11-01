@@ -6,11 +6,11 @@ import 'home.dart';
 
 class DASResult extends StatelessWidget {
   const DASResult({
-    Key? key,
+    super.key,
     required this.depression,
     required this.anxiety,
     required this.stress,
-  }) : super(key: key);
+  });
 
   final String depression;
   final String anxiety;

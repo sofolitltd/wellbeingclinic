@@ -6,11 +6,11 @@ import 'home.dart';
 
 class DarkTriadResult extends StatelessWidget {
   const DarkTriadResult({
-    Key? key,
+    super.key,
     required this.machiavellianism,
     required this.psychopathy,
     required this.narcissism,
-  }) : super(key: key);
+  });
 
   final String machiavellianism;
   final String psychopathy;

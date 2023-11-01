@@ -8,7 +8,7 @@ import '../widgets/item_card.dart';
 import '../widgets/loading.dart';
 
 class DAS extends StatefulWidget {
-  const DAS({Key? key}) : super(key: key);
+  const DAS({super.key});
 
   @override
   State<DAS> createState() => _DASState();

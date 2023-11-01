@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "243651729948-auqbsnlja9ob4jleh051ur2qq486c84m.apps.googleusercontent.com",
+          "client_id": "243651729948-vgr07ih1bagn2mf0iv4g1fjp0egff5t7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sofolit.wellbeingclinic",
+            "certificate_hash": "ccf96e882ee397837d788b63461561cc8e6934a4"
+          }
+        },
+        {
+          "client_id": "243651729948-qibp49ikgh89l2392tpf1p81n4gpbia4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

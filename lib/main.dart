@@ -1,6 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'package:wellbeingclinic/screens/das.dart';
+import '/auth/profile.dart';
+import '/auth/wrapper.dart';
+import '/screens/das.dart';
+import '/screens/details.dart';
 
 import '/auth/splash.dart';
 import '/screens/dark_triad.dart';
@@ -10,12 +14,15 @@ import '/screens/self_esteem.dart';
 import '/screens/social_anxiety.dart';
 import '/screens/stress.dart';
 import '/screens/wellbeing.dart';
+import 'auth/login.dart';
+import 'firebase_options.dart';
+import 'payment/payment.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   //todo: add firebase
   setPathUrlStrategy();
   runApp(const MyApp());
@@ -33,9 +40,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'hindSiliguri',
-        appBarTheme: const AppBarTheme(
+        appBarTheme:  AppBarTheme(
           elevation: 0,
-          backgroundColor: Color(0xff72dfc1),
+          backgroundColor: Colors.green.shade200,
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(minimumSize: const Size(100, 48)),
@@ -43,15 +50,22 @@ class MyApp extends StatelessWidget {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             minimumSize: const Size(100, 48),
-            backgroundColor: const Color(0xff4fd0a1),
+            backgroundColor:  Colors.green.shade200,
+            textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1,)
           ),
         ),
       ),
       // home: const SplashScreen(),
-      initialRoute: '/',
+      initialRoute: '/wrap',
       routes: {
+        '/wrap': (context) => const WrapperScreen(),
         '/splash': (context) => const SplashScreen(),
-        '/': (context) => const Home(),
+        '/login': (context) => const Login(),
+        '/profile': (context) => const Profile(),
+        '/home': (context) => const Home(),
+        '/details': (context) => const Details(),
+        '/payment': (context) => const Payment(),
+
         '/wellbeing': (context) => const Wellbeing(),
         '/self-steam': (context) => const SelfEsteem(),
         '/stress': (context) => const Stress(),

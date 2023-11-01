@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '/auth/login.dart';
 
 import '../screens/home.dart';
 
 class WrapperScreen extends StatelessWidget {
-  const WrapperScreen({Key? key}) : super(key: key);
-  static const routeName = '/';
+  const WrapperScreen({super.key});
+  static const routeName = '/wrap';
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class WrapperScreen extends StatelessWidget {
         if (snapshot.hasData) {
           return const Home();
         } else {
-          return const Home();
+          return const Login();
         }
       },
     );

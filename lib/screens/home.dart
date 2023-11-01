@@ -1,14 +1,39 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '/utils/constants.dart';
 import '/widgets/test_card.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
+    getProfileImage() {
+      var currentUser = FirebaseAuth.instance.currentUser;
+
+      if (currentUser!.photoURL != null) {
+        return Container(
+          height: 32,
+          width: 32,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.blueAccent.shade100,
+              image: DecorationImage(
+                  fit: BoxFit.contain,
+                  image: NetworkImage(currentUser.photoURL!)
+              )
+          ),
+        );
+      } else {
+        return const Icon(
+          Icons.account_circle,
+          size: 100,
+        );
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -17,6 +42,16 @@ class Home extends StatelessWidget {
           'assets/images/wellbeing_clinic.png',
           height: 40,
         ),
+        actions: [
+
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/profile');
+            },
+            child:  Padding(
+                padding:const EdgeInsets.only(right: 16), child: getProfileImage()),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -55,16 +90,20 @@ class Home extends StatelessWidget {
 }
 
 class Tests {
+  final String id;
   final String title;
   final String description;
+  final String author;
   final Color color;
   final String image;
   final String items;
   final String route;
 
   Tests({
+    required this.id,
     required this.title,
     required this.description,
+    required this.author,
     required this.color,
     required this.image,
     required this.items,
@@ -74,18 +113,22 @@ class Tests {
 
 List<Tests> testList = [
   Tests(
+    id: '01',
     title: 'Wellbeing Scale',
     description:
         'Measure of mental well-being focusing entirely on positive aspects of mental health',
+    author: 'WHO',
     color: kGreenColor,
     image: '1',
     items: '5',
     route: '/wellbeing',
   ),
   Tests(
+    id: '02',
     title: 'Self Esteem',
     description:
         'Measures global self-worth by measuring both positive and negative feelings about the self',
+    author: 'N/A',
     color: kPurpleColor,
     image: '2',
     items: '10',
@@ -100,35 +143,43 @@ List<Tests> testList = [
   //   route: '/stress',
   // ),
   Tests(
+    id: '03',
     title: 'Depression, Anxiety & Stress Scale',
     description:
         'Measuring the amount of depression, anxiety and stress experienced recently',
+    author: 'N/A',
     color: kMediumBlueColor,
     image: '4',
     items: '20',
     route: '/das',
   ),
   Tests(
+    id: '04',
     title: 'Dark Triad Dirty Dozen',
     description:
         'Use to determine whether or not we may embody the dark triad personality traits',
+    author: 'N/A',
     color: kPinkColor,
     image: '3',
     items: '12',
     route: '/dark-triad',
   ),
   Tests(
+    id: '05',
     title: 'Social Anxiety',
     description:
         'Assess how comfortable when we are interacting with other people',
+    author: 'N/A',
     color: kLightBlueColor,
     image: '5',
     items: '28',
     route: '/social-anxiety',
   ),
   Tests(
+    id: '06',
     title: 'Internet Addiction Test',
     description: 'Measures the presence and severity of internet addiction',
+    author: 'N/A',
     color: kBlueColor,
     image: '6',
     items: '18',

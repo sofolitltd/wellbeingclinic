@@ -14,7 +14,7 @@ class TestCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, test.route);
+        Navigator.pushNamed(context, '/details', arguments: test);
       },
       child: Container(
         padding: const EdgeInsets.all(12),
