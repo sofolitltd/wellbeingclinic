@@ -4,7 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '/models/result_model.dart';
 import '/utils/constants.dart';
 
-import '../test_screen.dart';
 
 class SelfEsteemResult extends StatelessWidget {
   const SelfEsteemResult({super.key, required this.resultModel});

@@ -3,7 +3,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '/models/result_model.dart';
 import '/utils/constants.dart';
-import '/screens/tests/test_screen.dart';
 
 class InternetAddictionResult extends StatelessWidget {
   const InternetAddictionResult({super.key, required this.resultModel});

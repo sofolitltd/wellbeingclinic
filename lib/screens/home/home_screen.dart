@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../utils/constants.dart';
@@ -70,7 +69,6 @@ class HomeScreen extends StatelessWidget {
       "You are not your feelings",
     ];
 
-    final DateTime today = DateTime.now();
     final int randomIndex = Random().nextInt(quotes.length);
     final String quote = quotes[randomIndex];
 
@@ -162,7 +160,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
 
-                const SizedBox(height: 24),
+                const SizedBox(height: 32),
 
                 //
                 Text(
@@ -182,11 +180,11 @@ class HomeScreen extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   child: Row(
                     children: [
-                      greetingCard(context, title: 'Happy', image: '1'),
-                      greetingCard(context, title: 'Sad', image: '2'),
-                      greetingCard(context, title: 'Angry', image: '3'),
-                      greetingCard(context, title: 'Anxiety', image: '5'),
-                      greetingCard(context, title: 'Fear', image: '4'),
+                      greetingCard(context, title: 'Happy', image: '😊'),
+                      greetingCard(context, title: 'Sad', image: '😔'),
+                      greetingCard(context, title: 'Angry', image: '😠'),
+                      greetingCard(context, title: 'Anxiety', image: '😟'),
+                      greetingCard(context, title: 'Fear', image: '😨'),
                     ],
                   ),
                 ),
@@ -297,6 +295,7 @@ Widget greetingCard(BuildContext context, {required title, required image}) {
         felling = "Fear is a normal emotion, but it shouldn't hold you back. Face your fears head-on, and you'll be stronger for it.Don't let fear stop you from living your life to the fullest.";
       }
 
+      //
       showDialog(
         context: context,
         builder: (context) =>
@@ -312,7 +311,7 @@ Widget greetingCard(BuildContext context, {required title, required image}) {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                title,
+                '$title $image',
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               IconButton(
@@ -373,18 +372,20 @@ Widget greetingCard(BuildContext context, {required title, required image}) {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 4),
-          Image.asset(
-            'assets/images/$image.png',
-            width: 72,
-            height: 72,
-          ),
+           Text(image, style: const TextStyle(fontSize: 48),),
+          // Image.asset(
+          //   'assets/images/$image.png',
+          //   width: 72,
+          //   height: 72,
+          // ),
           const SizedBox(height: 12),
           Text(
-            title.toUpperCase(),
+            title,
             style: const TextStyle(
-              color: Colors.black87,
+              color: Colors.black54,
               height: 1.2,
               letterSpacing: .5,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],

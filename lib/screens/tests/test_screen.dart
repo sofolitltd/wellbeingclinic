@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '/utils/constants.dart';
@@ -12,28 +11,6 @@ class TestScreen extends StatelessWidget {
     var size = MediaQuery.of(context).size;
 
     //
-    getProfileImage() {
-      var currentUser = FirebaseAuth.instance.currentUser;
-
-      if (currentUser!.photoURL != null) {
-        return Container(
-          height: 32,
-          width: 32,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-              border: Border.all(color: Colors.blueGrey),
-              image: DecorationImage(
-                  fit: BoxFit.contain,
-                  image: NetworkImage(currentUser.photoURL!))),
-        );
-      } else {
-        return const Icon(
-          Icons.account_circle,
-          size: 100,
-        );
-      }
-    }
 
     return Scaffold(
       body: SafeArea(

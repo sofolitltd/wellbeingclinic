@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:url_strategy/url_strategy.dart';
 import '/screens/landing_screen.dart';
 import '/auth/profile.dart';
 import '/auth/wrapper.dart';
@@ -25,7 +24,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   //todo: add firebase
-  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
