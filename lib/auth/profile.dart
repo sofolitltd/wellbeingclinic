@@ -16,17 +16,18 @@ class Profile extends StatelessWidget {
     getProfileImage() {
       if (currentUser!.photoURL != null) {
         return Container(
-          height: 100,
-          width: 100,
+          height: 150,
+          width: 150,
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
-              border: Border.all(color: Colors.blueGrey),
-          color: Colors.grey.shade50,
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(currentUser.photoURL!)
-            )
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.blueGrey.shade50, width: 5),
+              color: Colors.grey.shade50,
+
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(currentUser.photoURL!)),
           ),
+
         );
       } else {
         return const Icon(
@@ -53,17 +54,34 @@ class Profile extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            getProfileImage(),
-            const SizedBox(height: 32),
-            Text('Name: ${currentUser!.displayName}'),
-            const SizedBox(height: 4),
-            Text('Email: ${currentUser.email}'),
-          ],
+      body: Card(
+        margin: const EdgeInsets.all(8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              getProfileImage(),
+              const SizedBox(height: 24),
+              Text(
+                '${currentUser!.displayName}',
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                '${currentUser.email}',
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+
+                    ),
+              ),
+              const SizedBox(height: 4),
+            ],
+          ),
         ),
       ),
     );

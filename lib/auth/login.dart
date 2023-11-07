@@ -53,7 +53,7 @@ class _LoginState extends State<Login> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
-                  onPressed: () async {
+                  onPressed: isLoading ? null:  () async {
                     setState(() => isLoading = true);
                     await authService.handleSignIn().then((value) {
                       setState(() => isLoading = false);

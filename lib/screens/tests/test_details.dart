@@ -86,7 +86,7 @@ class _TestDetailsState extends State<TestDetails> {
               ),
 
               const SizedBox(
-                height: 40,
+                height: 32,
               ),
 
               //
@@ -101,109 +101,9 @@ class _TestDetailsState extends State<TestDetails> {
                     }
 
                     if (!snapshot.hasData || !snapshot.data!.exists) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: test.color,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.shade400,
-                              offset: const Offset(2, 4),
-                              blurRadius: 8,
-                            ),
-                          ],
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 24, horizontal: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'price',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w300,
-                                    height: 1,
-                                    color: Colors.black87,
-                                  ),
-                                ),
 
-                                //
-                                StreamBuilder<DocumentSnapshot>(
-                                  stream: FirebaseFirestore.instance
-                                      .collection('test')
-                                      .doc(test.id)
-                                      .snapshots(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      // Get the document data from the snapshot.
-                                      final DocumentSnapshot documentSnapshot =
-                                          snapshot.data!;
-
-                                      price = documentSnapshot.get('price');
-
-                                      return Text(
-                                        '$price BDT',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          color: Colors.black,
-                                        ),
-                                      );
-                                    } else if (snapshot.hasError) {
-                                      return const Text(
-                                        '',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                        ),
-                                      );
-                                    } else {
-                                      return const Text(
-                                        '',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                        ),
-                                      );
-                                    }
-                                  },
-                                )
-                              ],
-                            ),
-
-                            const SizedBox(width: 16),
-
-                            //
-                            Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: OutlinedButton.icon(
-                                  style: OutlinedButton.styleFrom(
-                                      side:
-                                          const BorderSide(color: Colors.black54),
-                                      shape: const StadiumBorder(),
-                                      textStyle:
-                                          const TextStyle(color: Colors.black)),
-                                  onPressed: () {
-                                    setState(() {
-                                      isLoading = true;
-                                    });
-                                    print(price);
-                                    paymentCheckout(price!.toDouble());
-                                  },
-                                  icon: const Icon(Icons.keyboard_arrow_right,
-                                      color: Colors.black),
-                                  label: const Text('Buy Now',
-                                      style: TextStyle(color: Colors.black))),
-                            ),
-                          ],
-                        ),
-                      );
+                      return Container();
                     }
-
-
 
                     List tests = snapshot.data!.get('tests');
                     print(tests);
@@ -241,108 +141,155 @@ class _TestDetailsState extends State<TestDetails> {
                       );
                     }
 
-                    //
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: test.color,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.shade400,
-                            offset: const Offset(2, 4),
-                            blurRadius: 8,
-                          ),
-                        ],
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 24, horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'price',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  height: 1,
-                                  color: Colors.black87,
+                    return StreamBuilder<DocumentSnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('test')
+                          .doc(test.id)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if(snapshot.connectionState ==ConnectionState.waiting){
+                          return Container();
+                        }
+                        if (!snapshot.hasData) {
+                          return Container();}
+                          // Get the document data from the snapshot.
+                          final DocumentSnapshot documentSnapshot =
+                          snapshot.data!;
+
+                          price = documentSnapshot.get('price');
+                          if(price == 0){
+                           return Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                const Text(
+                                  'I agree with privacy policy',
+                                  style: TextStyle(
+                                    color: Colors.blueGrey,
+                                  ),
                                 ),
-                              ),
 
-                              //
-                              StreamBuilder<DocumentSnapshot>(
-                                stream: FirebaseFirestore.instance
-                                    .collection('test')
-                                    .doc(test.id)
-                                    .snapshots(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    // Get the document data from the snapshot.
-                                    final DocumentSnapshot documentSnapshot =
-                                        snapshot.data!;
+                                const SizedBox(height: 8),
 
-                                    price = documentSnapshot.get('price');
-                                    return Text(
-                                      '$price BDT',
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
+                                Directionality(
+                                  textDirection: TextDirection.rtl,
+                                  child: ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: test.color,
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, test.route);
+                                      },
+                                      icon: const Icon(
+                                        Icons.arrow_right_alt,
                                         color: Colors.black,
                                       ),
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    return const Text(
-                                      '',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                      ),
-                                    );
-                                  } else {
-                                    return const Text(
-                                      '',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                      ),
-                                    );
-                                  }
-                                },
-                              )
+                                      label:  Text('Continue'.toUpperCase(),
+                                          style:const TextStyle(color: Colors.black))),
+                                ),
+                              ],
+                            );
+                          }
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: test.color,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.shade400,
+                                offset: const Offset(2, 4),
+                                blurRadius: 8,
+                              ),
                             ],
                           ),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 24, horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'price',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      height: 1,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
 
-                          const SizedBox(width: 16),
+                                  //
+                                  StreamBuilder<DocumentSnapshot>(
+                                    stream: FirebaseFirestore.instance
+                                        .collection('test')
+                                        .doc(test.id)
+                                        .snapshots(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        // Get the document data from the snapshot.
+                                        final DocumentSnapshot documentSnapshot =
+                                            snapshot.data!;
 
-                          //
-                          isLoading
-                              ? const CircularProgressIndicator()
-                              : Directionality(
-                                  textDirection: TextDirection.rtl,
-                                  child: OutlinedButton.icon(
-                                      style: OutlinedButton.styleFrom(
-                                          side: const BorderSide(
-                                            color: Colors.black54,
+                                        price = documentSnapshot.get('price');
+
+                                        return Text(
+                                          '$price BDT',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: Colors.black,
                                           ),
-                                          shape: const StadiumBorder(),
-                                          textStyle: const TextStyle(
-                                              color: Colors.black)),
-                                      onPressed: () async {
-                                        setState(() {
-                                          isLoading = true;
-                                        });
-                                        print(price);
-                                        await paymentCheckout(price!.toDouble());
-                                      },
-                                      icon: const Icon(Icons.keyboard_arrow_right,
-                                          color: Colors.black),
-                                      label: const Text('Buy Now',
-                                          style: TextStyle(color: Colors.black))),
-                                ),
-                        ],
-                      ),
+                                        );
+                                      } else if (snapshot.hasError) {
+                                        return const Text(
+                                          '',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                        );
+                                      } else {
+                                        return const Text(
+                                          '',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  )
+                                ],
+                              ),
+
+                              const SizedBox(width: 16),
+
+                              //
+                              Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: OutlinedButton.icon(
+                                    style: OutlinedButton.styleFrom(
+                                        side:
+                                            const BorderSide(color: Colors.black54),
+                                        shape: const StadiumBorder(),
+                                        textStyle:
+                                            const TextStyle(color: Colors.black)),
+                                    onPressed: () {
+                                      setState(() {
+                                        isLoading = true;
+                                      });
+                                      print(price);
+                                      paymentCheckout(price!.toDouble());
+                                    },
+                                    icon: const Icon(Icons.keyboard_arrow_right,
+                                        color: Colors.black),
+                                    label: const Text('Buy Now',
+                                        style: TextStyle(color: Colors.black))),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     );
                   },
               ),
