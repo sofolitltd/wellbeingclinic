@@ -12,14 +12,17 @@ class HomeScreen extends StatelessWidget {
 
   String greeting() {
     var hour = DateTime.now().hour;
-    if (hour <= 12) {
-      return ('Good Morning');
-    } else if ((hour > 12) && (hour <= 16)) {
-      return ('Good Afternoon');
-    } else if ((hour > 16) && (hour < 20)) {
-      return ('Good Evening');
+
+    if (hour < 12) {
+      return 'Good Morning';
+    } else if (hour < 17) {
+      return 'Good Afternoon';
+    } else if (hour < 20) {
+      return 'Good Evening';
+    } else if (hour == 24) {
+      return 'Good Midnight';
     } else {
-      return ('Good Night');
+      return 'Good Night';
     }
   }
 
@@ -101,10 +104,11 @@ class HomeScreen extends StatelessWidget {
                                     height: 1.2,
                                   ),
                         ),
-                        Text(
-                          FirebaseAuth.instance.currentUser!.displayName!,
-                          style: const TextStyle(height: 1.4),
-                        ),
+                        //todo:user
+                        // Text(
+                        //   FirebaseAuth.instance.currentUser!.displayName!,
+                        //   style: const TextStyle(height: 1.4),
+                        // ),
                       ],
                     ),
 
@@ -153,7 +157,9 @@ class HomeScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.pushNamed(context, '/profile');
                           },
-                          child: getProfileImage(),
+                          //todo:image
+                          // child: getProfileImage(),
+                          child: const CircleAvatar(),
                         )
                       ],
                     ),
@@ -195,7 +201,7 @@ class HomeScreen extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    gradient:  LinearGradient(
+                    gradient: LinearGradient(
                       colors: [
                         Colors.indigo,
                         Colors.purple.shade300,
@@ -216,7 +222,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                           '" $quote "',
+                            '" $quote "',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
@@ -228,7 +234,6 @@ class HomeScreen extends StatelessWidget {
                                 ),
                           ),
                         ),
-
                         const Icon(
                           Icons.format_quote_rounded,
                           size: 64,
@@ -286,13 +291,15 @@ Widget greetingCard(BuildContext context, {required title, required image}) {
       } else if (title == 'Sad') {
         felling =
             "It's okay to feel sad sometimes. Remember that you are loved and supported, and that you are strong enough to get through this. Take some time for yourself and do something you enjoy, you'll be okay.";
-      } else if (title == 'Angry'){
+      } else if (title == 'Angry') {
         felling =
             "It's okay to feel angry sometimes. Take a deep breath and find a healthy way to express your anger, don't let it control you. Talk to someone you trust about how you're feeling, and you'll feel better. I hope this helps!";
-      }else if (title == 'Anxiety'){
-     felling =  "Take a deep breath and remember that you are not alone. Anxiety is a normal human emotion, and it is okay to feel it sometimes. But you are stronger than your anxiety, and you will get through this.";
-      }else{
-        felling = "Fear is a normal emotion, but it shouldn't hold you back. Face your fears head-on, and you'll be stronger for it.Don't let fear stop you from living your life to the fullest.";
+      } else if (title == 'Anxiety') {
+        felling =
+            "Take a deep breath and remember that you are not alone. Anxiety is a normal human emotion, and it is okay to feel it sometimes. But you are stronger than your anxiety, and you will get through this.";
+      } else {
+        felling =
+            "Fear is a normal emotion, but it shouldn't hold you back. Face your fears head-on, and you'll be stronger for it.Don't let fear stop you from living your life to the fullest.";
       }
 
       //
@@ -335,19 +342,21 @@ Widget greetingCard(BuildContext context, {required title, required image}) {
       );
 
       //
-      var uid = FirebaseAuth.instance.currentUser!.uid;
-      var date =
-          "${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}";
-      await FirebaseFirestore.instance
-          .collection('feeling')
-          .doc(uid)
-          .collection('date')
-          .doc(date)
-          .set({
-        "uid": uid,
-        "time": DateTime.now(),
-        "felling": title,
-      });
+      if (FirebaseAuth.instance.currentUser?.uid != null) {
+        var uid = FirebaseAuth.instance.currentUser!.uid;
+        var date =
+            "${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}";
+        await FirebaseFirestore.instance
+            .collection('feeling')
+            .doc(uid)
+            .collection('date')
+            .doc(date)
+            .set({
+          "uid": uid,
+          "time": DateTime.now(),
+          "felling": title,
+        });
+      }
     },
     child: Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -372,7 +381,10 @@ Widget greetingCard(BuildContext context, {required title, required image}) {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 4),
-           Text(image, style: const TextStyle(fontSize: 48),),
+          Text(
+            image,
+            style: const TextStyle(fontSize: 48),
+          ),
           // Image.asset(
           //   'assets/images/$image.png',
           //   width: 72,

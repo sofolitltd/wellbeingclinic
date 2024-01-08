@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 
 import '/utils/constants.dart';
 import '/widgets/test_card.dart';
+import '/widgets/test_card_grid.dart';
 
-class TestScreen extends StatelessWidget {
+class TestScreen extends StatefulWidget {
   const TestScreen({super.key});
+
+  @override
+  State<TestScreen> createState() => _TestScreenState();
+}
+
+class _TestScreenState extends State<TestScreen> {
+  bool isListView = true;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +21,7 @@ class TestScreen extends StatelessWidget {
     //
 
     return Scaffold(
+      //body
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -24,28 +33,81 @@ class TestScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                   horizontal: size.width > 1000 ? size.width * .2 : 16,
                 ),
-                child: Text(
-                  "Test".toUpperCase(),
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                        height: 1.2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Test".toUpperCase(),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.2,
+                            height: 1.2,
+                          ),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isListView = true;
+                              });
+                            },
+                            icon: Icon(
+                              Icons.list_alt_rounded,
+                              color: isListView ? Colors.black : Colors.grey,
+                            )),
+                        IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isListView = false;
+                              });
+                            },
+                            icon: Icon(
+                              Icons.grid_view_rounded,
+                              color: isListView ? Colors.grey : Colors.black,
+                            )),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              //
+              isListView
+                  ? ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: size.width > 1000 ? size.width * .2 : 12,
+                        vertical: 12,
                       ),
-                ),
-              ),
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(
-                  horizontal: size.width > 1000 ? size.width * .2 : 12,
-                  vertical: 12,
-                ),
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 12),
-                itemCount: testList.length,
-                itemBuilder: (context, index) =>
-                    TestCard(test: testList[index]),
-              ),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 12),
+                      itemCount: testList.length,
+                      itemBuilder: (context, index) =>
+                          TestCard(test: testList[index]),
+                    )
+                  : GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: size.width > 1000 ? size.width * .2 : 12,
+                        vertical: 12,
+                      ),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: size.width > 960
+                            ? 5
+                            : size.width > 600
+                                ? 4
+                                : 3,
+                        childAspectRatio: .8,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                      ),
+                      itemCount: testList.length,
+                      itemBuilder: (context, index) =>
+                          TestCardGrid(test: testList[index]),
+                    ),
             ],
           ),
         ),
@@ -86,7 +148,7 @@ List<Tests> testList = [
     color: kGreenColor,
     image: '1',
     items: '5',
-    route: '/wellbeing',
+    route: '/tests/wellbeing',
   ),
   Tests(
     id: '02',
@@ -97,16 +159,8 @@ List<Tests> testList = [
     color: kPurpleColor,
     image: '2',
     items: '10',
-    route: '/self-steam',
+    route: '/tests/self-esteem',
   ),
-  // Tests(
-  //   title: 'Stress Scale',
-  //   description: 'Measuring the amount of stress experienced recently',
-  //   color: kYellowColor,
-  //   image: '',
-  //   items: '20',
-  //   route: '/stress',
-  // ),
   Tests(
     id: '03',
     title: 'Depression, Anxiety & Stress Scale',
@@ -116,7 +170,7 @@ List<Tests> testList = [
     color: kMediumBlueColor,
     image: '4',
     items: '20',
-    route: '/das',
+    route: '/tests/das',
   ),
   Tests(
     id: '04',
@@ -127,7 +181,7 @@ List<Tests> testList = [
     color: kPinkColor,
     image: '3',
     items: '12',
-    route: '/dark-triad',
+    route: '/tests/dark-triad',
   ),
   Tests(
     id: '05',
@@ -138,16 +192,77 @@ List<Tests> testList = [
     color: kLightBlueColor,
     image: '5',
     items: '28',
-    route: '/social-anxiety',
+    route: '/tests/social-anxiety',
   ),
   Tests(
     id: '06',
     title: 'Internet Addiction Test',
-    description: "Internet addiction is a behavioral addiction that is characterized by excessive use of the internet, to the point where it interferes with daily life. People with internet addiction may spend hours online each day, neglecting their work, studies, relationships, and other important activities. They may also experience withdrawal symptoms when they are not able to use the internet, such as anxiety, irritability, and difficulty concentrating.",
+    description:
+        "Internet addiction is a behavioral addiction that is characterized by excessive use of the internet, to the point where it interferes with daily life. People with internet addiction may spend hours online each day, neglecting their work, studies, relationships, and other important activities. They may also experience withdrawal symptoms when they are not able to use the internet, such as anxiety, irritability, and difficulty concentrating.",
     author: 'N/A',
     color: kBlueColor,
     image: '6',
     items: '18',
-    route: '/internet-addiction',
+    route: '/tests/internet-addiction',
   ),
+  Tests(
+    id: '07',
+    title: 'Hopelessness Scale(Beck)',
+    description: 'Hopelessness ',
+    author: 'N/A',
+    color: kYellowColor,
+    image: '6',
+    items: '20',
+    route: '/tests/hopelessness',
+  ),
+  Tests(
+    id: '08',
+    title: 'Depression',
+    description: 'Measure Depression ',
+    author: 'N/A',
+    color: kYellowColor,
+    image: '6',
+    items: '9',
+    route: '/tests/depression',
+  ),
+  Tests(
+    id: '09',
+    title: 'Love Obsession',
+    description: 'Love Obsession',
+    author: 'N/A',
+    color: kYellowColor,
+    image: '6',
+    items: '13',
+    route: '/tests/love-obsession',
+  ),
+  Tests(
+    id: '10',
+    title: 'General Anxiety Disorder',
+    description: 'General Anxiety Disorder',
+    author: 'N/A',
+    color: kYellowColor,
+    image: '6',
+    items: '7',
+    route: '/tests/gad',
+  ),
+  Tests(
+    id: '11',
+    title: 'Insomnia',
+    description: 'Insomnia',
+    author: 'N/A',
+    color: kYellowColor,
+    image: '6',
+    items: '7',
+    route: '/tests/insomnia',
+  ),
+  // Tests(
+  //   id: '12',
+  //   title: 'Stress Scale',
+  //   description: 'Measuring the amount of stress experienced recently',
+  //   author: '',
+  //   color: kYellowColor,
+  //   image: '5',
+  //   items: '20',
+  //   route: '/stress',
+  // ),
 ];

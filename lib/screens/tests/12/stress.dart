@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../../widgets/item_card.dart';
-import '../../widgets/loading.dart';
+import '../../../widgets/item_card.dart';
+import '../../../widgets/loading.dart';
 import '/items/items.dart';
 import '/models/result_model.dart';
-
 import 'stress_result.dart';
 
 class Stress extends StatefulWidget {
@@ -100,9 +100,9 @@ class _StressState extends State<Stress> {
                             if (result < 20) {
                               title = 'Low';
                               subtitle = 'low stress';
-                            } else if (result.clamp(15, 20) == result) {
+                            } else if (result.clamp(21, 60) == result) {
                               title = 'Moderate stress';
-                              subtitle = 'low stress';
+                              subtitle = 'Moderate stress';
                             } else if (result > 60) {
                               title = 'High stress';
                               subtitle = 'high stress';
@@ -129,10 +129,18 @@ class _StressState extends State<Stress> {
                           //
                           setState(() => _inProgress = false);
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Text('Submit now'.toUpperCase()),
-                        ),
+                        child: _inProgress
+                            ? const SpinKitThreeBounce(
+                                color: Colors.white,
+                                size: 50,
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Text(
+                                  'Submit now'.toUpperCase(),
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              ),
                       ),
                     )
                   ],

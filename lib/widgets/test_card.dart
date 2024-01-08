@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../screens/tests/test_screen.dart';
 
-
 class TestCard extends StatelessWidget {
   const TestCard({
     super.key,
@@ -15,7 +14,7 @@ class TestCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/details', arguments: test);
+        Navigator.pushNamed(context, '/tests', arguments: test);
       },
       child: Container(
         padding: const EdgeInsets.all(12),
@@ -59,13 +58,14 @@ class TestCard extends StatelessWidget {
                         test.description,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                              wordSpacing: 1.2,
-                              height: 1.3,
-                              letterSpacing: .2,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.blueGrey,
-                            ),
+                        style:
+                            Theme.of(context).textTheme.labelMedium!.copyWith(
+                                  wordSpacing: 1.2,
+                                  height: 1.3,
+                                  letterSpacing: .2,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.blueGrey,
+                                ),
                       ),
                     ),
                   ],

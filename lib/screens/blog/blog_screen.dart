@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 import '/models/blog_model.dart';
 import '/widgets/blog_card.dart';
-import '/screens/blog/add_blog.dart';
 
 class BlogScreen extends StatelessWidget {
   const BlogScreen({super.key});
@@ -13,20 +12,20 @@ class BlogScreen extends StatelessWidget {
     var size = MediaQuery.of(context).size;
 
     return Scaffold(
-      floatingActionButton:
-          FirebaseAuth.instance.currentUser!.email! != "asifreyad1@gmail.com"
-              ? null
-              : FloatingActionButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const AddBlog(),
-                      ),
-                    );
-                  },
-                  child: const Icon(Icons.add),
-                ),
+      // floatingActionButton:
+      //     FirebaseAuth.instance.currentUser!.email! != "asifreyad1@gmail.com"
+      //         ? null :
+      //     FloatingActionButton(
+      //             onPressed: () {
+      //               Navigator.push(
+      //                 context,
+      //                 MaterialPageRoute(
+      //                   builder: (_) => const AddBlog(),
+      //                 ),
+      //               );
+      //             },
+      //             child: const Icon(Icons.add),
+      //           ),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),

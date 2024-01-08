@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../models/result_model.dart';
 import '/utils/constants.dart';
-
 
 class WellbeingResult extends StatelessWidget {
   const WellbeingResult({super.key, required this.resultModel});
@@ -63,15 +63,16 @@ class WellbeingResult extends StatelessWidget {
                     Text(
                       resultModel.title.toUpperCase(),
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                            fontWeight: FontWeight.bold,
-                            height: 1.4,
-                            color: resultModel.title == 'Low'
-                                ? Colors.red
-                                : resultModel.title == 'Moderate'
-                                    ? Colors.orange
-                                    : Colors.green,
-                          ),
+                      style:
+                          Theme.of(context).textTheme.headlineLarge!.copyWith(
+                                fontWeight: FontWeight.bold,
+                                height: 1.4,
+                                color: resultModel.title == 'Low'
+                                    ? Colors.red
+                                    : resultModel.title == 'Moderate'
+                                        ? Colors.orange
+                                        : Colors.green,
+                              ),
                     ),
                     //
                     const SizedBox(height: 16),
@@ -107,10 +108,11 @@ class WellbeingResult extends StatelessWidget {
                         ),
                         child: Text(
                           'Need mental health service?',
-                          style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                                fontFamily: 'hindSiliguri',
-                                fontWeight: FontWeight.bold,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.titleSmall!.copyWith(
+                                    fontFamily: 'hindSiliguri',
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ),
                     ),
@@ -144,8 +146,10 @@ class WellbeingResult extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-
-                                  const Icon(Icons.facebook, color: Colors.blueAccent,),
+                                  const Icon(
+                                    Icons.facebook,
+                                    color: Colors.blueAccent,
+                                  ),
                                   const SizedBox(width: 8),
                                   //
                                   Text(
@@ -174,10 +178,10 @@ class WellbeingResult extends StatelessWidget {
                             const url = kContact;
 
                             if (!await launchUrl(
-                            Uri.parse(url),
-                            mode: LaunchMode.externalApplication,
+                              Uri.parse(url),
+                              mode: LaunchMode.externalApplication,
                             )) {
-                            throw Exception('Could not launch $url');
+                              throw Exception('Could not launch $url');
                             }
                           },
                           child: Container(
@@ -192,10 +196,12 @@ class WellbeingResult extends StatelessWidget {
                                 vertical: 12, horizontal: 20),
                             child: Text(
                               'Contact now',
-                              style:
-                                  Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                        fontFamily: 'hindSiliguri',
-                                      ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontFamily: 'hindSiliguri',
+                                  ),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -206,7 +212,6 @@ class WellbeingResult extends StatelessWidget {
                 ),
               ),
 
-
               // back to test
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
@@ -216,8 +221,7 @@ class WellbeingResult extends StatelessWidget {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child:  Text("Test again".toUpperCase())),
-
+                        child: Text("Test again".toUpperCase())),
                     const SizedBox(width: 16),
                     Expanded(
                       child: OutlinedButton(
@@ -227,7 +231,6 @@ class WellbeingResult extends StatelessWidget {
                           },
                           child: Text("Back to All Tests".toUpperCase())),
                     ),
-
                   ],
                 ),
               ),

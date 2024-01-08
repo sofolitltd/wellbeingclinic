@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 32),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
                 'Welcome',
@@ -53,12 +53,14 @@ class _LoginState extends State<Login> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
-                  onPressed: isLoading ? null:  () async {
-                    setState(() => isLoading = true);
-                    await authService.handleSignIn().then((value) {
-                      setState(() => isLoading = false);
-                    });
-                  },
+                  onPressed: isLoading
+                      ? null
+                      : () async {
+                          setState(() => isLoading = true);
+                          await authService.handleSignIn().then((value) {
+                            setState(() => isLoading = false);
+                          });
+                        },
                   icon: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -73,13 +75,18 @@ class _LoginState extends State<Login> {
                         ),
                     ],
                   ),
-                  label: Text(isLoading ? '' : 'Login with Google'.toUpperCase()),
+                  label: Text(
+                    isLoading ? '' : 'Login with Google'.toUpperCase(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
 
+              const SizedBox(height: 32),
 
-              const SizedBox(height: 40),
-
+              const Text('-  connect us  -'),
               //
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

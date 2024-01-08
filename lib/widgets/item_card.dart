@@ -27,17 +27,24 @@ class _ItemCardState extends State<ItemCard> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: _selectedOption == null
-            ? null
-            : const Border(left: BorderSide(color: Colors.indigo, width: 3,),),
-      ),
+          border: Border.all(
+            color: _selectedOption == null ? Colors.transparent : Colors.indigo,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(8)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           //
           Container(
-            color: Colors.grey.shade200,
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
+              ),
+            ),
             child: Text(
               '${widget.testItems[widget.index].id}. ${widget.testItems[widget.index].title}',
               style: const TextStyle(fontFamily: 'tiro'),
@@ -46,8 +53,14 @@ class _ItemCardState extends State<ItemCard> {
 
           //
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            color: Colors.grey.shade300,
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+              ),
+            ),
             child: Column(
               children: widget.testScale
                   .map(
