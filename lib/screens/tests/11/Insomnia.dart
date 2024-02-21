@@ -95,18 +95,22 @@ class _InsomniaState extends State<Insomnia> {
 
                       if (sum.clamp(0, 7) == sum) {
                         title = 'Absence of Insomnia';
-                        subtitle = 'Absence of Insomnia';
+                        subtitle =
+                            'আপনার ঘুমে কোনো সমস্যা নেই। আপনার ঘুমাতে যেতে বা ঘুমের মধ্যে তেমন কোনো অসুবিধা হয় না।';
                       } else if (sum.clamp(8, 14) == sum) {
                         title = 'Mild of Insomnia';
-                        subtitle = 'Mild of Insomnia';
+                        subtitle =
+                            'আপনার সামান্য ইনসমনিয়া আছে। আপনাকে ঠিকভাবে ঘুমাতে যথেষ্ট বেগ পেতে হয়। এছাড়াও দিনে আপনি পরিমিত ঘুমাতে পারছেন না। ';
                       } else if (sum.clamp(15, 21) == sum) {
                         print('Moderate');
                         title = 'Moderate of Insomnia';
-                        subtitle = 'Moderate of Insomnia';
+                        subtitle =
+                            'আপনার প্রায়ই অনিদ্রাজনিত সমস্যায় ভুগছেন। অপরিমিত ঘুম এবং ঘুমাতে যেতে আপনার অনেক বেগ পেতে হচ্ছে। এর ফলে আপনার সামাজিক এবং কর্মক্ষেত্রে অসুবিধা হচ্ছে।';
                       } else if (sum.clamp(22, 28) == sum) {
                         print('Severe');
                         title = 'Severe of Insomnia';
-                        subtitle = 'Severe of Insomnia';
+                        subtitle =
+                            'আপনি প্রচন্ড অনিদ্রায় ভুগছেন। আপনার পরিমিত এবং ভালো ঘুম হচ্ছে না। এর ফলে আপনার সামাজিক এবং কর্মক্ষেত্র ব্যাপকভাবে ব্যাহত হচ্ছে।';
                       }
 
                       setState(() => _inProgress = true);

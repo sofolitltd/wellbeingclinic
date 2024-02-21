@@ -13,7 +13,7 @@ class HopelessnessResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Internet Addiction'),
+        title: const Text('Hopelessness Result'),
         centerTitle: true,
       ),
       body: Padding(

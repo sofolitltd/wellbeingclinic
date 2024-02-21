@@ -96,24 +96,29 @@ class _DepressionState extends State<Depression> {
                       if (sum.clamp(0, 4) == sum) {
                         print('Minimal');
                         title = 'Minimal';
-                        subtitle = 'Minimal / None';
+                        subtitle =
+                            'আপনি যথেষ্ট উৎফুল্ল। জীবনকে আপনি নিজের মত করে উপভোগ করেন।';
                       } else if (sum.clamp(5, 9) == sum) {
                         print('Mild');
                         title = 'Mild Depression';
-                        subtitle = 'Mild Depression';
+                        subtitle =
+                            'আপনি কিছুটা বিষণ্ণতায় ভুগছেন। আপনার জীবনের নানান ক্ষেত্রে এর প্রভাব পড়ছে। যেমন - ঘুমে অসুবিধা, ক্ষুধামন্দা, দুর্বলতা, খিটখিটে মেজাজ, অসহায় অনুভব করা ইত্যাদি।';
                       } else if (sum.clamp(10, 14) == sum) {
                         print('Moderate');
                         title = 'Moderately Depression';
-                        subtitle = 'Moderately Depression';
+                        subtitle =
+                            'আপনি যথেষ্ট বিষণ্ণতায় ভুগছেন।  আপনার ব্যক্তিগত ও সামাজিক জীবন এর ফলে  ব্যাহত হচ্ছে। কর্মজীবনেও এর নেতিবাচক প্রভাব পড়ছে। আপনি নিজেকে মূল্যহীন ভাবছেন। এবং যেকোনো বিষয়ে আপনি সহজেই উদ্বিগ্ন হয়ে পড়ছেন।';
                       } else if (sum.clamp(15, 19) == sum) {
                         print('Moderately severe ');
                         title = 'Moderately Severe Depression';
-                        subtitle = 'Moderately Severe Depression';
+                        subtitle =
+                            'আপনি অনেক বিষণ্ণতায় ভুগছেন।  আপনার ব্যক্তিগত ও সামাজিক জীবনে এর ব্যাপক নেতিবাচক প্রভাব পড়ছে। কর্মজীবনেও আপনার যথেষ্ট অবনতি হচ্ছে। আপনি নিজেকে মূল্যহীন ভাবছেন এবং যেকোনো বিষয়ে আপনি সহজেই উদ্বিগ্ন হয়ে পড়ছেন।';
                       }
                       if (sum.clamp(20, 27) == sum) {
                         print('Severe');
                         title = 'Severe Depression';
-                        subtitle = 'Severe Depression';
+                        subtitle =
+                            'আপনি প্রচন্ড বিষণ্ণ। আপনার প্রায়ই হ্যালুসিনেশন বা বিভ্রম হচ্ছে। একই সাথে আপনি নির্জীব হয়ে পড়েছেন। আপনার আত্মহত্যার চেষ্টা করেছেন বা প্রায়ই এধরণের চিন্তা আসছে।';
                       }
 
                       setState(() => _inProgress = true);

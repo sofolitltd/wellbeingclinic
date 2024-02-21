@@ -96,21 +96,24 @@ class _HopelessnessState extends State<Hopelessness> {
                       if (sum.clamp(0, 3) == sum) {
                         print('Normal');
                         title = 'Normal';
-                        subtitle = 'Normal';
+                        subtitle =
+                            'আপনার এই আশাহীনতা স্বাভাবিক। একজন স্বাভাবিক মানুষ জীবনে প্রতিনিয়ত এটুকু আশাহীনতা মোকাবিলা করে থাকে। একঘেয়েমিতা বা ক্লান্তি এর কারণ হতে পারে।';
                       } else if (sum.clamp(4, 8) == sum) {
                         print('Mild');
                         title = 'Mild Hopelessness';
-                        subtitle = 'Mild Hopelessness';
+                        subtitle =
+                            'আপনি কিছুটা আশাহীনতায় ভুগছেন। আপনি সহজেই বিভিন্ন ক্ষেত্রে নিরাশ হয়ে পড়ছেন। এটি আপনার দৈনন্দিন জীবনে প্রভাব ফেলতে পারে।';
                       } else if (sum.clamp(9, 14) == sum) {
                         print('Moderate');
                         title = 'Moderate Hopelessness';
                         subtitle =
-                            'May not be in immediate danger but requires frequent regular monitoring. Is the lief situation stable';
+                            'আপনি বর্তমানে যথেষ্ট নিরাশ। কোন কাজে যথাযথ প্রেরণা পাচ্ছেন না। যা আপনার জীবনে স্বাভাবিকভাবে এগিয়ে যাওয়া ব্যাহত করছে।';
                       }
                       if (15 <= sum) {
                         print('Severe');
                         title = 'Severe Hopelessness';
-                        subtitle = 'Definite suicidal risk';
+                        subtitle =
+                            'আপনি আপনার জীবনে চরম আশাহীনতায় ভুগছেন। জীবনে কোনোকিছুতেই আপনি তেমন আগ্রহ পাচ্ছেন না। আপনার মধ্যে এর ফলে নেতিবাচকতা বৃদ্ধি পাচ্ছে যার ফলে আপনি নিজের জন্য ক্ষতিকর পদক্ষেপ নেওয়ার চিন্তা করেন।';
                       }
 
                       setState(() => _inProgress = true);

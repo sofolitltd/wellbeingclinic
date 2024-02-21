@@ -112,16 +112,19 @@ class _LoveObsessionState extends State<LoveObsession> {
                         testAnswer.forEach((key, value) {
                           if ((key == 12 && value == 1) ||
                               (key == 13 && value == 1)) {
-                            subtitle = "Love Obsession.\n You need counseling.";
+                            subtitle =
+                                "আপনি LOVE OBSESSED। আপনি কারো প্রতি অপ্রতিরোধ্য আকর্ষণ অনুভব করছেন। একইসাথে আপনি তার প্রতি অসঙ্গত অধিকারবোধ রাখার চেষ্টা করছেন। \n সাহায্যের জন্য কাউন্সিলরের শরণাপন্ন হতে পারেন";
                             print(subtitle);
                           } else {
-                            subtitle = "Love Obsession";
+                            subtitle =
+                                "আপনি LOVE OBSESSED । আপনি কারো প্রতি অপ্রতিরোধ্য আকর্ষণ অনুভব করছেন। একইসাথে আপনি তার প্রতি অসঙ্গত অধিকারবোধ রাখার চেষ্টা করছেন। ";
                             print(subtitle);
                           }
                         });
                       } else {
-                        title = 'Not Love Obsession';
-                        subtitle = "Not Love Obsession";
+                        title = 'No Love Obsession';
+                        subtitle =
+                            "আপনি LOVE OBSESSED নন। কারো প্রতি আপনার আকর্ষণ স্বাভাবিকমাত্রায় বিদ্যমান।";
                       }
 
                       setState(() => _inProgress = true);

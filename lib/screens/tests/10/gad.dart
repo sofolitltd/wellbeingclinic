@@ -96,20 +96,24 @@ class _GADState extends State<GAD> {
                       if (sum.clamp(0, 4) == sum) {
                         print('Moderate');
                         title = 'Minimal Anxiety';
-                        subtitle = 'Minimal Anxiety';
+                        subtitle =
+                            'আপনার তেমন কোনো দুশ্চিন্তা নেই। সামান্য দুশ্চিন্তা থাকলেও আপনি তা কাটিয়ে উঠতে পারেন।';
                       } else if (sum.clamp(5, 9) == sum) {
                         print('Mild');
                         title = 'Mild Anxiety';
-                        subtitle = 'Mild Anxiety';
+                        subtitle =
+                            'আপনি কিছুটা দুশ্চিন্তায় ভুগছেন। আপনার মনোযোগ দিতে সমস্যা হচ্ছে, এবং সহজেই মেজাজ খিটখিটে হয়ে যাচ্ছে। আপনি মাঝেমধ্যে অস্থিরতা অনুভব করছেন।';
                       } else if (sum.clamp(10, 14) == sum) {
                         print('Moderate');
                         title = 'Moderate Anxiety';
-                        subtitle = 'Moderate Anxiety';
+                        subtitle =
+                            'আপনি অনেকটা দুশ্চিন্তায় ভুগছেন। আপনার অনিয়ন্ত্রিত চিন্তা বেড়ে যাচ্ছে। এছাড়াও ঘুমে অসুবিধা, শ্বাসকষ্ট, অস্থিরতা, খিটখিটে মেজাজ আপনার জীবন ব্যাপকভাবে ব্যাহত করছে। আপনি ক্রমাগত উদ্বেগ অনুভব করছেন।';
                       }
                       if (sum.clamp(15, 21) == sum) {
                         print('Severe Anxiety');
                         title = 'Severe Anxiety';
-                        subtitle = 'Severe Anxiety';
+                        subtitle =
+                            'আপনি প্রচন্ড দুশ্চিন্তাগ্রস্ত। আপনার মধ্যে ব্যাপক অস্থিরতা কাজ করে। পাশাপাশি শ্বাসকষ্ট, ঘুমে অসুবিধা ইত্যাদি হচ্ছে। অতিরিক্ত চিন্তার দরুন ঘর্মাক্ত হয়ে পড়া বা প্যানিক অ্যাটাক দেখা দিচ্ছে।';
                       }
 
                       setState(() => _inProgress = true);
