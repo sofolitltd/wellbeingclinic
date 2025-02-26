@@ -1,15 +1,16 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../../utils/constants.dart';
+import '/utils/daily_quote.dart';
+import 'counseling_card.dart';
+import 'counseling_details.dart';
+import 'emotion_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  //
   String greeting() {
     var hour = DateTime.now().hour;
 
@@ -27,24 +28,29 @@ class HomeScreen extends StatelessWidget {
   }
 
   //pp
+  //
   getProfileImage() {
     var currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser!.photoURL != null) {
+
+    if (currentUser?.photoURL != null) {
       return Container(
         height: 40,
         width: 40,
         decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.white,
-            border: Border.all(color: Colors.blueGrey),
-            image: DecorationImage(
-                fit: BoxFit.contain,
-                image: NetworkImage(currentUser.photoURL!))),
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.grey.shade400, width: 1),
+          color: Colors.grey.shade100,
+          image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                  currentUser?.photoURL != null ? currentUser!.photoURL! : "")),
+        ),
       );
     } else {
-      return const Icon(
+      return Icon(
         Icons.account_circle,
-        size: 100,
+        size: 40,
+        color: Colors.grey.shade400,
       );
     }
   }
@@ -52,28 +58,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-//
-    List quotes = [
-      "It's okay not to be okay",
-      "You are not your mental illness",
-      "Your struggles do not define you",
-      "Healing is not linear, but it is possible",
-      "You are stronger than you realize",
-      "Your mental health journey is unique to you",
-      "Self-care is not selfish, it's necessary for good mental health",
-      "Small steps can lead to big progress in mental health",
-      "It's okay to ask for help",
-      "You are not alone",
-      "Your mental health matters",
-      "You are worthy of love and happiness",
-      "There is no shame in seeking help for your mental health",
-      "You are capable of great things",
-      "You are not your thoughts",
-      "You are not your feelings",
-    ];
-
-    final int randomIndex = Random().nextInt(quotes.length);
-    final String quote = quotes[randomIndex];
 
     return Scaffold(
       body: SafeArea(
@@ -88,13 +72,18 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                //
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     //
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const SizedBox(height: 2),
+
+                        //
                         Text(
                           greeting().toUpperCase(),
                           style:
@@ -104,11 +93,19 @@ class HomeScreen extends StatelessWidget {
                                     height: 1.2,
                                   ),
                         ),
-                        //todo:user
-                        // Text(
-                        //   FirebaseAuth.instance.currentUser!.displayName!,
-                        //   style: const TextStyle(height: 1.4),
-                        // ),
+
+                        const SizedBox(height: 4),
+
+                        //
+                        Text(
+                          FirebaseAuth.instance.currentUser != null
+                              ? FirebaseAuth.instance.currentUser!.displayName!
+                              : "Friend",
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    height: 1.2,
+                                  ),
+                        ),
                       ],
                     ),
 
@@ -159,7 +156,7 @@ class HomeScreen extends StatelessWidget {
                           },
                           //todo:image
                           // child: getProfileImage(),
-                          child: const CircleAvatar(),
+                          child: getProfileImage(),
                         )
                       ],
                     ),
@@ -172,9 +169,9 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   'How are you feeling today?',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.bold,
                         // letterSpacing: 1,
-                        fontSize: 18,
+                        fontSize: 16,
                         color: Colors.black87,
                       ),
                 ),
@@ -185,17 +182,13 @@ class HomeScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   physics: const BouncingScrollPhysics(),
                   child: Row(
-                    children: [
-                      greetingCard(context, title: 'Happy', image: '😊'),
-                      greetingCard(context, title: 'Sad', image: '😔'),
-                      greetingCard(context, title: 'Angry', image: '😠'),
-                      greetingCard(context, title: 'Anxiety', image: '😟'),
-                      greetingCard(context, title: 'Fear', image: '😨'),
-                    ],
+                    children: emotions
+                        .map((Emotion emotion) => emotionCard(context, emotion))
+                        .toList(),
                   ),
                 ),
 
-                const SizedBox(height: 32),
+                const SizedBox(height: 24),
 
                 //quote
                 Container(
@@ -210,19 +203,14 @@ class HomeScreen extends StatelessWidget {
                       end: Alignment.topRight,
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16,
-                      right: 8,
-                      top: 8,
-                      bottom: 8,
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(12, 10, 0, 10),
                           child: Text(
-                            '" $quote "',
+                            getDailyQuote(),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
@@ -230,17 +218,20 @@ class HomeScreen extends StatelessWidget {
                                   color: Colors.white,
                                   // letterSpacing: .4,
                                   // fontWeight: FontWeight.w600,
-                                  height: 1.2,
+                                  height: 1.4,
                                 ),
                           ),
                         ),
-                        const Icon(
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(right: 8),
+                        child: Icon(
                           Icons.format_quote_rounded,
-                          size: 64,
+                          size: 48,
                           color: Colors.white70,
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
 
@@ -255,22 +246,57 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.black87,
                       ),
                 ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    counselingCard(context, title: 'Student\nCounseling'),
-                    const SizedBox(width: 16),
-                    counselingCard(context, title: 'Individual\nCounseling'),
-                  ],
+                const SizedBox(height: 8),
+                //
+
+                StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('counseling')
+                      .orderBy('order')
+                      .snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                    if (!snapshot.hasData) {
+                      return const Center(child: Text('No data available'));
+                    }
+
+                    return SizedBox(
+                      height: 330,
+                      child: ListView.separated(
+                        separatorBuilder: (_, __) => const SizedBox(width: 16),
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          var counselingData = snapshot.data!.docs[index];
+                          print(counselingData.id);
+                          return CounselingCard(
+                            imageUrl: counselingData['imageUrl'],
+                            title: counselingData['title'],
+                            description: counselingData['description'],
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CounselingDetailsPage(
+                                    title: counselingData['title'],
+                                    description: counselingData['description'],
+                                    imageUrl: counselingData['imageUrl'],
+                                    causes: counselingData['causes'],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    counselingCard(context, title: 'Couple\nCounseling'),
-                    const SizedBox(width: 16),
-                    counselingCard(context, title: 'Family\nCounseling'),
-                  ],
-                )
               ],
             ),
           ),
@@ -278,174 +304,4 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-//
-Widget greetingCard(BuildContext context, {required title, required image}) {
-  return GestureDetector(
-    onTap: () async {
-      var felling = '';
-      if (title == 'Happy') {
-        felling =
-            "You are glowing with joy today! Keep radiating and shining bright, your happiness is contagious and lifts up the people around you. Keep up the good work.";
-      } else if (title == 'Sad') {
-        felling =
-            "It's okay to feel sad sometimes. Remember that you are loved and supported, and that you are strong enough to get through this. Take some time for yourself and do something you enjoy, you'll be okay.";
-      } else if (title == 'Angry') {
-        felling =
-            "It's okay to feel angry sometimes. Take a deep breath and find a healthy way to express your anger, don't let it control you. Talk to someone you trust about how you're feeling, and you'll feel better. I hope this helps!";
-      } else if (title == 'Anxiety') {
-        felling =
-            "Take a deep breath and remember that you are not alone. Anxiety is a normal human emotion, and it is okay to feel it sometimes. But you are stronger than your anxiety, and you will get through this.";
-      } else {
-        felling =
-            "Fear is a normal emotion, but it shouldn't hold you back. Face your fears head-on, and you'll be stronger for it.Don't let fear stop you from living your life to the fullest.";
-      }
-
-      //
-      showDialog(
-        context: context,
-        builder: (context) =>
-            //
-            AlertDialog(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-          ),
-          titlePadding: const EdgeInsets.only(left: 16, top: 4),
-          contentPadding:
-              const EdgeInsets.only(left: 16, top: 8, right: 16, bottom: 24),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '$title $image',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              IconButton(
-                style: IconButton.styleFrom(
-                  backgroundColor: Colors.grey.shade200,
-                ),
-                icon: const Icon(Icons.close_rounded),
-                onPressed: () {
-                  // Dismiss the alert dialog.
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-          content: Text(
-            felling,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16, height: 1.4),
-          ),
-        ),
-      );
-
-      //
-      if (FirebaseAuth.instance.currentUser?.uid != null) {
-        var uid = FirebaseAuth.instance.currentUser!.uid;
-        var date =
-            "${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}";
-        await FirebaseFirestore.instance
-            .collection('feeling')
-            .doc(uid)
-            .collection('date')
-            .doc(date)
-            .set({
-          "uid": uid,
-          "time": DateTime.now(),
-          "felling": title,
-        });
-      }
-    },
-    child: Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      margin: const EdgeInsets.only(
-        right: 8,
-        top: 8,
-        bottom: 8,
-        left: 8,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white60,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 8,
-            offset: Offset(4, 1),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: 4),
-          Text(
-            image,
-            style: const TextStyle(fontSize: 48),
-          ),
-          // Image.asset(
-          //   'assets/images/$image.png',
-          //   width: 72,
-          //   height: 72,
-          // ),
-          const SizedBox(height: 12),
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.black54,
-              height: 1.2,
-              letterSpacing: .5,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-//
-Widget counselingCard(context, {required title}) {
-  return Expanded(
-    child: InkWell(
-      onTap: () async {
-        const url = kContact;
-
-        if (!await launchUrl(
-          Uri.parse(url),
-          mode: LaunchMode.externalApplication,
-        )) {
-          throw Exception('Could not launch $url');
-        }
-      },
-      child: Container(
-        height: 100,
-        alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Colors.white70,
-            border: Border.all(color: Colors.white30),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 8,
-                offset: Offset(4, 1),
-              ),
-            ]),
-        child: Text(
-          title,
-          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                fontWeight: FontWeight.w800,
-                fontSize: 20,
-                letterSpacing: 1,
-                height: 1.2,
-                color: Colors.blueGrey,
-              ),
-        ),
-      ),
-    ),
-  );
 }

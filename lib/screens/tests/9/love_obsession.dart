@@ -64,6 +64,7 @@ class _LoveObsessionState extends State<LoveObsession> {
                     testItems: Items.loveObsessionItems,
                     testScale: Items.loveObsessionScale,
                     testAnswer: testAnswer,
+                    onChanged: () {},
                   );
                 },
               ),

@@ -59,6 +59,7 @@ class _HopelessnessState extends State<Hopelessness> {
                     testItems: Items.hopelessnessItems,
                     testScale: Items.hopelessnessScale,
                     testAnswer: testAnswer,
+                    onChanged: () {},
                   );
                 },
               ),

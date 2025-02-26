@@ -62,6 +62,7 @@ class _StressState extends State<Stress> {
                           testItems: Items.stressItems,
                           testScale: itemChecker(Items.stressItems[index].id),
                           testAnswer: testAnswer,
+                          onChanged: () {},
                         );
                       },
                     ),

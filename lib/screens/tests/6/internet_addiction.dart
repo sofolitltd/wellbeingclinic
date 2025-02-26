@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../../../models/result_model.dart';
-import '../../../widgets/item_card.dart';
 import '/items/items.dart';
-import 'internet_addiction_result.dart';
+import '../../../widgets/item_card.dart';
+import '../../test_page.dart';
+import '../1/wellbeing.dart';
 
 class InternetAddiction extends StatefulWidget {
   const InternetAddiction({super.key});
@@ -19,6 +19,12 @@ class _InternetAddictionState extends State<InternetAddiction> {
 
   @override
   Widget build(BuildContext context) {
+    // Get arguments from previous screen
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    Tests test = args['test']; // Extract test object
+    String mobileNo = args['mobile_no']; // Extract mobile number
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -29,132 +35,137 @@ class _InternetAddictionState extends State<InternetAddiction> {
 
       //
       body: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width > 1000
-                      ? MediaQuery.of(context).size.width * .2
-                      : 12,
-                  vertical: 12,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width > 1000
+                ? MediaQuery.of(context).size.width * .2
+                : 12,
+            vertical: 12,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                Items.internetAddictionInstruction,
+                style: const TextStyle(fontFamily: 'tiro'),
+              ),
+
+              const SizedBox(height: 16),
+
+              //
+              ListView.separated(
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 16),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: Items.internetAddictionItems.length,
+                itemBuilder: (context, index) {
+                  return ItemCard(
+                    index: index,
+                    testItems: Items.internetAddictionItems,
+                    testScale: Items.internetAddictionScale,
+                    testAnswer: testAnswer,
+                    onChanged: () {},
+                  );
+                },
+              ),
+
+              const SizedBox(height: 16),
+
+              //
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      Items.internetAddictionInstruction,
-                      style: const TextStyle(fontFamily: 'tiro'),
-                    ),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    double sum = 0;
 
-                    const SizedBox(height: 16),
+                    // get the list of all values of the map
+                    List<dynamic> values = testAnswer.values.toList();
 
-                    //
-                    ListView.separated(
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 16),
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: Items.internetAddictionItems.length,
-                      itemBuilder: (context, index) {
-                        return ItemCard(
-                          index: index,
-                          testItems: Items.internetAddictionItems,
-                          testScale: Items.internetAddictionScale,
-                          testAnswer: testAnswer,
-                        );
-                      },
-                    ),
+                    // calculate the sum with a loop
+                    for (var value in values) {
+                      sum += value;
+                    }
 
-                    const SizedBox(height: 16),
+                    // print out the sum
+                    print(sum);
 
-                    //
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 16,
-                      ),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          double sum = 0;
+                    if ((testAnswer.length !=
+                        Items.internetAddictionItems.length)) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Please fill all items')));
+                    } else {
+                      //todo: result
+                      String title = '';
+                      String subtitle = '';
 
-                          // get the list of all values of the map
-                          List<dynamic> values = testAnswer.values.toList();
+                      if (sum.clamp(18, 35) == sum) {
+                        title = 'Minimal User';
+                        subtitle =
+                            'আপনার ইন্টারনেট আসক্তি নেই। আপনার ইন্টারনেট ব্যবহারের উপর পূর্ণ নিয়ন্ত্রণ রয়েছে।';
+                      } else if (sum.clamp(36, 62) == sum) {
+                        print('Moderate user');
+                        title = 'Moderate User';
+                        subtitle =
+                            'আপনি প্রয়োজনের তুলনায় কিছুটা বেশি সময় ইন্টারনেটে ব্যয় করে থাকেন। যা পরবর্তীতে আসক্তি তে রুপান্তরিত হতে পারে।';
+                      }
+                      if (sum.clamp(63, 90) == sum) {
+                        print('Excessive user');
+                        title = 'Excessive User';
+                        subtitle =
+                            'আপনার ইন্টারনেট আসক্তি বিদ্যমান। আপনি প্রয়োজনের চেয়ে বেশি ইন্টারনেট ব্যবহার করে থাকেন,যা আপনার দৈনন্দিন জীবনে নেতিবাচক প্রভাব ফেলছে।';
+                      }
 
-                          // calculate the sum with a loop
-                          for (var value in values) {
-                            sum += value;
-                          }
+                      setState(() => _inProgress = true);
 
-                          // print out the sum
-                          print(sum);
+                      //
+                      await updateTestResultByMobile(mobileNo, test.id, title);
 
-                          if ((testAnswer.length !=
-                              Items.internetAddictionItems.length)) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Please fill all items')));
-                          } else {
-                            //todo: result
-                            String title = '';
-                            String subtitle = '';
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/success',
+                        arguments: {'mobile_no': mobileNo},
+                      );
 
-                            if (sum.clamp(18, 35) == sum) {
-                              title = 'Minimal User';
-                              subtitle =
-                                  'আপনার ইন্টারনেট আসক্তি নেই। আপনার ইন্টারনেট ব্যবহারের উপর পূর্ণ নিয়ন্ত্রণ রয়েছে।';
-                            } else if (sum.clamp(36, 62) == sum) {
-                              print('Moderate user');
-                              title = 'Moderate User';
-                              subtitle =
-                                  'আপনি প্রয়োজনের তুলনায় কিছুটা বেশি সময় ইন্টারনেটে ব্যয় করে থাকেন। যা পরবর্তীতে আসক্তি তে রুপান্তরিত হতে পারে।';
-                            }
-                            if (sum.clamp(63, 90) == sum) {
-                              print('Excessive user');
-                              title = 'Excessive User';
-                              subtitle =
-                                  'আপনার ইন্টারনেট আসক্তি বিদ্যমান। আপনি প্রয়োজনের চেয়ে বেশি ইন্টারনেট ব্যবহার করে থাকেন,যা আপনার দৈনন্দিন জীবনে নেতিবাচক প্রভাব ফেলছে।';
-                            }
+                      // await Future.delayed(const Duration(seconds: 1)).then(
+                      //   (value) {
+                      //     //
+                      //     Navigator.pushReplacement(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //         builder: (context) => InternetAddictionResult(
+                      //           resultModel: ResultModel(
+                      //             sum: sum,
+                      //             title: title,
+                      //             subtitle: subtitle,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      // );
 
-                            setState(() => _inProgress = true);
-
-                            await Future.delayed(const Duration(seconds: 1))
-                                .then(
-                              (value) {
-                                //
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        InternetAddictionResult(
-                                      resultModel: ResultModel(
-                                        sum: sum,
-                                        title: title,
-                                        subtitle: subtitle,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-
-                            //
-                            setState(() => _inProgress = false);
-                          }
-                        },
-                        child:
-                        _inProgress
-                            ?  const SpinKitThreeBounce(
+                      //
+                      setState(() => _inProgress = false);
+                    }
+                  },
+                  child: _inProgress
+                      ? const SpinKitThreeBounce(
                           color: Colors.white,
                           size: 50,
                         )
-                            :
-                        Padding(
+                      : Padding(
                           padding: const EdgeInsets.all(16),
                           child: Text('Submit now'.toUpperCase()),
                         ),
-                      ),
-                    )
-                  ],
                 ),
-              ),
-            ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

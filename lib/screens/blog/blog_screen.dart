@@ -32,11 +32,12 @@ class BlogScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              //
               Container(
-                margin: const EdgeInsets.only(top: 24, bottom: 8),
+                margin: const EdgeInsets.only(top: 16, bottom: 8),
                 padding: EdgeInsets.symmetric(
-                  horizontal: size.width > 1000 ? size.width * .2 : 16,
-                ),
+                    horizontal: size.width > 1000 ? size.width * .2 : 16,
+                    vertical: 8),
                 child: Text(
                   "Blog".toUpperCase(),
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -46,10 +47,12 @@ class BlogScreen extends StatelessWidget {
                       ),
                 ),
               ),
+
+              //
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('blog')
-                    .orderBy('date', descending: true)
+                    // .orderBy('date', descending: true)
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
@@ -57,7 +60,11 @@ class BlogScreen extends StatelessWidget {
                   }
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height - 100,
+                        child:
+                            const Center(child: CircularProgressIndicator()));
                   }
 
                   if (snapshot.data!.size == 0) {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:wellbeingclinic/screens/tests/11/insomnia_result.dart';
 
 import '/items/items.dart';
-import '/models/result_model.dart';
 import '/widgets/item_card.dart';
+import '../../test_page.dart';
+import '../1/wellbeing.dart';
 
 class Insomnia extends StatefulWidget {
   const Insomnia({super.key});
@@ -19,6 +19,12 @@ class _InsomniaState extends State<Insomnia> {
 
   @override
   Widget build(BuildContext context) {
+    // Get arguments from previous screen
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    Tests test = args['test']; // Extract test object
+    String mobileNo = args['mobile_no']; // Extract mobile number
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -59,6 +65,7 @@ class _InsomniaState extends State<Insomnia> {
                     testItems: Items.insomniaItems,
                     testScale: itemChecker(Items.insomniaItems[index].id),
                     testAnswer: testAnswer,
+                    onChanged: () {},
                   );
                 },
               ),
@@ -115,23 +122,32 @@ class _InsomniaState extends State<Insomnia> {
 
                       setState(() => _inProgress = true);
 
-                      await Future.delayed(const Duration(seconds: 1)).then(
-                        (value) {
-                          //
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => InsomniaResult(
-                                resultModel: ResultModel(
-                                  sum: sum,
-                                  title: title,
-                                  subtitle: subtitle,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
+                      //
+                      await updateTestResultByMobile(mobileNo, test.id, title);
+
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/success',
+                        arguments: {'mobile_no': mobileNo},
                       );
+
+                      // await Future.delayed(const Duration(seconds: 1)).then(
+                      //   (value) {
+                      //     //
+                      //     Navigator.pushReplacement(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //         builder: (context) => InsomniaResult(
+                      //           resultModel: ResultModel(
+                      //             sum: sum,
+                      //             title: title,
+                      //             subtitle: subtitle,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      // );
 
                       //
                       setState(() => _inProgress = false);

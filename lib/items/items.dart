@@ -150,6 +150,7 @@ class Items {
   // selfEsteem
   static String selfEsteemInstruction =
       'নিচে আত্মমর্যাদা সম্পর্কিত ১০টি উক্তি রয়েছে। প্রতিটি উক্তি আপনার ক্ষেত্রে কতটুকু প্রযোজ্য তা ৪টি পছন্দক্রমের যেকোনো একটিতে টিক(v) চিহ্ন দিয়ে প্রকাশ করুন।';
+
   static List selfEsteemScaleP = [
     ScaleModel(3, 'সম্পূর্ণভাবে একমত'),
     ScaleModel(2, 'একমত'),
@@ -162,6 +163,7 @@ class Items {
     ScaleModel(2, 'একমত নই'),
     ScaleModel(3, 'একেবারেই একমত নই'),
   ];
+
   static List<ItemModel> selfEsteemItems = [
     ItemModel(
       1,
@@ -337,26 +339,11 @@ class Items {
   static String stressInstruction =
       'গত মাসে আপনার অনূভুতিও চিন্তা সম্পর্কিত কিছু প্রশ্ন করব। প্রতিটি প্রশ্ন আমি আপনাকে পড়ে শোনাব। প্রতিটি প্রশ্নের জন্য পাঁচটি (৫টি) করে জবাব দেয়া আছে। যেটি আপনার কাছে প্রযোজ্য মনে হবে সেভাবে জবাব দিন। এখানে ভূল বা সঠিক জবাব নেই আপনার নিজস্ব অনুভূতিই ব্যক্ত করুন। আপনার মতামত এভাবে প্রকাশ করুন।';
   static List stressScaleP = [
-    ScaleModel(
-      0,
-      'কখনই না',
-    ),
-    ScaleModel(
-      1,
-      'প্রায় কখনই না/বেশির ভাগ সময় না',
-    ),
-    ScaleModel(
-      2,
-      'মাঝে মাঝে',
-    ),
-    ScaleModel(
-      3,
-      'প্রায়ই/বেশিরভাগ সময়',
-    ),
-    ScaleModel(
-      4,
-      'খুব বেশি',
-    ),
+    ScaleModel(0, 'কখনই না'),
+    ScaleModel(1, 'প্রায় কখনই না/বেশির ভাগ সময় না'),
+    ScaleModel(2, 'মাঝে মাঝে'),
+    ScaleModel(3, 'প্রায়ই/বেশিরভাগ সময়'),
+    ScaleModel(4, 'খুব বেশি'),
   ];
   static List stressScaleN = [
     ScaleModel(

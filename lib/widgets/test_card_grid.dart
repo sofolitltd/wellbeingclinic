@@ -14,7 +14,12 @@ class TestCardGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/tests', arguments: test);
+        // Navigator.pushNamed(context, '/tests', arguments: test);
+        Navigator.pushNamed(
+          context,
+          test.route,
+          arguments: test.id,
+        );
       },
       child: Container(
         padding: const EdgeInsets.fromLTRB(5, 12, 5, 8),
@@ -40,7 +45,7 @@ class TestCardGrid extends StatelessWidget {
             const Spacer(),
 
             Text(
-              test.title,
+              "${test.id}. ${test.title}",
               maxLines: 2,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(

@@ -1,26 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:wellbeingclinic/screens/admin.dart';
+import 'package:wellbeingclinic/screens/login_page.dart';
+import 'package:wellbeingclinic/screens/test_page.dart';
 
-import '/auth/profile.dart';
-import '/screens/landing_screen.dart';
-import '/screens/tests/10/gad.dart';
 import '/screens/tests/11/Insomnia.dart';
-import '/screens/tests/8/depression.dart';
-import '/screens/tests/9/love_obsession.dart';
-import '/screens/tests/test_details.dart';
-import 'auth/login.dart';
-import 'auth/splash.dart';
 import 'firebase_options.dart';
-import 'payment/payment.dart';
 import 'screens/tests/1/wellbeing.dart';
-import 'screens/tests/12/stress.dart';
 import 'screens/tests/2/self_esteem.dart';
 import 'screens/tests/3/das.dart';
 import 'screens/tests/4/dark_triad.dart';
 import 'screens/tests/5/social_anxiety.dart';
 import 'screens/tests/6/internet_addiction.dart';
-import 'screens/tests/7/hopelessness.dart';
-import 'screens/tests/test_screen.dart';
+import 'screens/tests/success.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +21,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   //todo: add firebase
+  usePathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -59,10 +53,10 @@ class MyApp extends StatelessWidget {
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             foregroundColor: Colors.black,
-            minimumSize: const Size(100, 56),
-            side: BorderSide(color: Colors.indigoAccent.shade200, width: 1.5),
+            minimumSize: const Size(100, 48),
+            // side: BorderSide(color: Colors.indigoAccent.shade200, width: 1.5),
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
             textStyle: const TextStyle(
               fontWeight: FontWeight.bold,
               letterSpacing: 1.2,
@@ -72,9 +66,9 @@ class MyApp extends StatelessWidget {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.white,
-            minimumSize: const Size(100, 56),
+            minimumSize: const Size(100, 48),
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
             backgroundColor: Colors.indigoAccent.shade200,
             textStyle: const TextStyle(
               fontWeight: FontWeight.bold,
@@ -91,27 +85,39 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         // '/': (context) => const WrapperScreen(),
-        '/': (context) => const LandingScreen(),
-        '/splash': (context) => const SplashScreen(),
-        '/login': (context) => const Login(),
-        '/profile': (context) => const Profile(),
-        '/test': (context) => const TestScreen(),
-        '/tests': (context) => const TestDetails(),
-        '/payment': (context) => const Payment(),
+        // '/': (context) => const LandingScreen(),
+        // '/splash': (context) => const SplashScreen(),
+        // '/login': (context) => const Login(),
+        // '/profile': (context) => const Profile(),
+        // '/emotion-calender': (context) => const EmotionCalender(),
+        // '/team': (context) => Team(),
+        //
+        // '/': (context) => const TestScreen(),
+        // '/tests': (context) => const TestDetails(),
+        // '/payment': (context) => const Payment(),
+
+        '/': (context) => LoginPage(),
+        '/tests': (context) => const TestPage(),
 
         //tests
-        '/tests/wellbeing': (context) => const Wellbeing(),
-        '/tests/self-esteem': (context) => const SelfEsteem(),
-        '/tests/stress': (context) => const Stress(),
-        '/tests/das': (context) => const DAS(),
-        '/tests/dark-triad': (context) => const DarkTriad(),
         '/tests/social-anxiety': (context) => const SocialAnxiety(),
+        '/tests/self-esteem': (context) => const SelfEsteem(),
+        '/tests/dark-triad': (context) => const DarkTriad(),
         '/tests/internet-addiction': (context) => const InternetAddiction(),
-        '/tests/hopelessness': (context) => const Hopelessness(),
-        '/tests/depression': (context) => const Depression(),
-        '/tests/love-obsession': (context) => const LoveObsession(),
-        '/tests/gad': (context) => const GAD(),
+        '/tests/das': (context) => const DAS(),
+        '/tests/wellbeing': (context) => const Wellbeing(),
         '/tests/insomnia': (context) => const Insomnia(),
+
+        '/success': (context) => const SuccessPage(),
+        //
+        '/admin': (context) => const Admin(),
+
+        //
+        // '/tests/stress': (context) => const Stress(),
+        // '/tests/hopelessness': (context) => const Hopelessness(),
+        // '/tests/depression': (context) => const Depression(),
+        // '/tests/love-obsession': (context) => const LoveObsession(),
+        // '/tests/gad': (context) => const GAD(),
       },
     );
   }

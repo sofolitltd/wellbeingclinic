@@ -59,6 +59,7 @@ class _GADState extends State<GAD> {
                     testItems: Items.gadItems,
                     testScale: Items.gadScale,
                     testAnswer: testAnswer,
+                    onChanged: () {},
                   );
                 },
               ),

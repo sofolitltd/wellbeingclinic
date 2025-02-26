@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../../../widgets/item_card.dart';
 import '/items/items.dart';
-import '/models/result_model.dart';
-
-import 'social_anxiety_result.dart';
+import '../../../widgets/item_card.dart';
+import '../../test_page.dart';
+import '../1/wellbeing.dart';
 
 class SocialAnxiety extends StatefulWidget {
   const SocialAnxiety({super.key});
@@ -20,6 +19,11 @@ class _SocialAnxietyState extends State<SocialAnxiety> {
 
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    Tests test = args['test']; // Extract test object
+    String mobileNo = args['mobile_no'];
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -30,129 +34,135 @@ class _SocialAnxietyState extends State<SocialAnxiety> {
 
       //
       body: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width > 1000
-                      ? MediaQuery.of(context).size.width * .2
-                      : 12,
-                  vertical: 12,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width > 1000
+                ? MediaQuery.of(context).size.width * .2
+                : 12,
+            vertical: 12,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                Items.socialAnxietyInstruction,
+                style: const TextStyle(fontFamily: 'tiro'),
+              ),
+
+              const SizedBox(height: 16),
+
+              //
+              ListView.separated(
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 16),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: Items.socialAnxietyItems.length,
+                itemBuilder: (context, index) {
+                  return ItemCard(
+                    index: index,
+                    testItems: Items.socialAnxietyItems,
+                    testScale: Items.socialAnxietyScale,
+                    testAnswer: testAnswer,
+                    onChanged: () {},
+                  );
+                },
+              ),
+
+              const SizedBox(height: 16),
+
+              //
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      Items.socialAnxietyInstruction,
-                      style: const TextStyle(fontFamily: 'tiro'),
-                    ),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    double sum = 0;
 
-                    const SizedBox(height: 16),
+                    // get the list of all values of the map
+                    List<dynamic> values = testAnswer.values.toList();
 
-                    //
-                    ListView.separated(
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 16),
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: Items.socialAnxietyItems.length,
-                      itemBuilder: (context, index) {
-                        return ItemCard(
-                          index: index,
-                          testItems: Items.socialAnxietyItems,
-                          testScale: Items.socialAnxietyScale,
-                          testAnswer: testAnswer,
-                        );
-                      },
-                    ),
+                    // calculate the sum with a loop
+                    for (var value in values) {
+                      sum += value;
+                    }
 
-                    const SizedBox(height: 16),
+                    // print out the sum
+                    print(sum);
 
-                    //
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 16,
-                      ),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          double sum = 0;
+                    if ((testAnswer.length !=
+                        Items.socialAnxietyItems.length)) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Please fill all items')));
+                    } else {
+                      //todo: result
+                      var result = sum.round();
 
-                          // get the list of all values of the map
-                          List<dynamic> values = testAnswer.values.toList();
+                      String title = '';
+                      String subtitle = '';
+                      if (result.clamp(0, 1) == result) {
+                        title = 'Low';
+                        subtitle =
+                            'সামাজিক পরিবেশে আপনি খুব বেশি অসস্তি অনুভব করেন না। আপনি অন্যদের সাথে যোগাযোগ স্থাপন করতে পারেন। আত্মবিশ্বাসী থাকেন।';
+                      } else if (result.clamp(2, 11) == result) {
+                        title = 'Average';
+                        subtitle =
+                            'সামাজিক পরিবেশে আপনি কিছুটা বিচলিত অনুভব করেন। মেপে কথা বলার চেষ্টা করেন।আপনার মনে হয় আশেপাশের মানুষ আপনাকে নিয়ে নেতিবাচক মন্তব্য করে তাই আপনি আত্মসচেতন থাকার চেষ্টা করেন।';
+                      } else if (result >= 12) {
+                        title = 'High';
+                        subtitle =
+                            'সামাজিক পরিবেশে আপনি অসস্তি অনুভব করেন। ভীড় বা জনসমাগম এড়িয়ে চলার চেষ্টা করেন। নিজেকে গুটিয়ে রাখার চেষ্টা করেন।';
+                      }
 
-                          // calculate the sum with a loop
-                          for (var value in values) {
-                            sum += value;
-                          }
+                      setState(() => _inProgress = true);
 
-                          // print out the sum
-                          print(sum);
+                      //
+                      await updateTestResultByMobile(mobileNo, test.id, title);
 
-                          if ((testAnswer.length !=
-                              Items.socialAnxietyItems.length)) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Please fill all items')));
-                          } else {
-                            //todo: result
-                            var result = sum.round();
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/success',
+                        arguments: {'mobile_no': mobileNo},
+                      );
 
-                            String title = '';
-                            String subtitle = '';
-                            if (result.clamp(0, 1) == result) {
-                              title = 'Low';
-                              subtitle =
-                                  'সামাজিক পরিবেশে আপনি খুব বেশি অসস্তি অনুভব করেন না। আপনি অন্যদের সাথে যোগাযোগ স্থাপন করতে পারেন। আত্মবিশ্বাসী থাকেন।';
-                            } else if (result.clamp(2, 11) == result) {
-                              title = 'Average';
-                              subtitle =
-                                  'সামাজিক পরিবেশে আপনি কিছুটা বিচলিত অনুভব করেন। মেপে কথা বলার চেষ্টা করেন।আপনার মনে হয় আশেপাশের মানুষ আপনাকে নিয়ে নেতিবাচক মন্তব্য করে তাই আপনি আত্মসচেতন থাকার চেষ্টা করেন।';
-                            } else if (result >= 12) {
-                              title = 'High';
-                              subtitle =
-                                  'সামাজিক পরিবেশে আপনি অসস্তি অনুভব করেন। ভীড় বা জনসমাগম এড়িয়ে চলার চেষ্টা করেন। নিজেকে গুটিয়ে রাখার চেষ্টা করেন।';
-                            }
+                      // await Future.delayed(const Duration(seconds: 1)).then(
+                      //   (value) {
+                      //     //
+                      //     Navigator.pushReplacement(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //         builder: (context) => SocialAnxietyResult(
+                      //           resultModel: ResultModel(
+                      //             sum: result.toDouble(),
+                      //             title: title,
+                      //             subtitle: subtitle,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      // );
 
-                            setState(() => _inProgress = true);
-
-                            await Future.delayed(const Duration(seconds: 1))
-                                .then(
-                              (value) {
-                                //
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SocialAnxietyResult(
-                                      resultModel: ResultModel(
-                                        sum: result.toDouble(),
-                                        title: title,
-                                        subtitle: subtitle,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-
-                            //
-                            setState(() => _inProgress = false);
-                          }
-                        },
-                        child:
-                        _inProgress
-                            ?  const SpinKitThreeBounce(
+                      //
+                      setState(() => _inProgress = false);
+                    }
+                  },
+                  child: _inProgress
+                      ? const SpinKitThreeBounce(
                           color: Colors.white,
                           size: 50,
                         )
-                            :
-                        Padding(
+                      : Padding(
                           padding: const EdgeInsets.all(16),
                           child: Text('Submit now'.toUpperCase()),
                         ),
-                      ),
-                    )
-                  ],
                 ),
-              ),
-            ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

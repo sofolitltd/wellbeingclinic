@@ -59,6 +59,7 @@ class _DepressionState extends State<Depression> {
                     testItems: Items.depressionItems,
                     testScale: Items.depressionScale,
                     testAnswer: testAnswer,
+                    onChanged: () {},
                   );
                 },
               ),

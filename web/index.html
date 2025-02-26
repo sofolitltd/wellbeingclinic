@@ -31,67 +31,11 @@
 
     <title>Wellbeing Clinic</title>
     <link rel="manifest" href="manifest.json">
-
-    <script>
-    // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = null;
-
-
-    </script>
-    <!-- This script adds the flutter initialization JS code -->
-    <script src="flutter.js" defer></script>
-
-    <!--loading style-->
-    <style>
-      .container {
-        width: 100vw;
-        height: 100vh;
-        display: flex; /* Default Axis is X*/
-        justify-content: center; /* Main Axis */
-        align-items: center; /* Cross Axis */
-      }
-      .indicator{
-        width: 7vw;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body style="overflow: hidden">
-<!--start loading-->
-<div id="loading_indicator" class="container">
-    <img class="indicator" src="./assets/loading.gif"/>
-</div>
+<body>
 
-<!--main-->
-<script>
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
-          });
-        }
-      });
-    });
-
-
-</script>
-
-<!--end loading-->
-<script>
-    window.onLoad = function () {
-        setTimeout(function () {
-          var loadingIndicator = document.getElementById("loading_indicator");
-          if (loadingIndicator) {
-            loadingIndicator.remove();
-          }
-        }, 5000);
-};
-
-</script>
-
+<script src="flutter_bootstrap.js" async></script>
 </body>
+
 </html>

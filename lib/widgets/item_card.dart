@@ -9,12 +9,14 @@ class ItemCard extends StatefulWidget {
     required this.testItems,
     required this.testScale,
     required this.testAnswer,
+    required this.onChanged, // Added onChanged callback here
   });
 
   final int index;
   final List testItems;
   final List testScale;
   final Map testAnswer;
+  final Function()? onChanged; // Callback to notify parent about changes
 
   @override
   State<ItemCard> createState() => _ItemCardState();
@@ -27,15 +29,15 @@ class _ItemCardState extends State<ItemCard> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(
-            color: _selectedOption == null ? Colors.transparent : Colors.indigo,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(8)),
+        border: Border.all(
+          color: _selectedOption == null ? Colors.transparent : Colors.indigo,
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          //
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             decoration: BoxDecoration(
@@ -50,8 +52,6 @@ class _ItemCardState extends State<ItemCard> {
               style: const TextStyle(fontFamily: 'tiro'),
             ),
           ),
-
-          //
           Container(
             padding: const EdgeInsets.symmetric(vertical: 5),
             decoration: BoxDecoration(
@@ -76,17 +76,14 @@ class _ItemCardState extends State<ItemCard> {
                       value: option,
                       groupValue: _selectedOption,
                       onChanged: (value) {
-                        print(value!.id);
                         setState(() {
                           _selectedOption = value;
-
-                          //
+                          widget.onChanged
+                              ?.call(); // Notify parent about the change
                           widget.testAnswer
                               .remove(widget.testItems[widget.index].id);
-                          widget.testAnswer.putIfAbsent(
-                              widget.testItems[widget.index].id,
-                              () => value.id);
-                          print(widget.testAnswer);
+                          widget.testAnswer[widget.testItems[widget.index].id] =
+                              value!.id;
                         });
                       },
                       visualDensity: const VisualDensity(vertical: -3),

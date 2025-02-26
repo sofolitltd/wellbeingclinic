@@ -28,8 +28,9 @@ class _TestScreenState extends State<TestScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // title
               Container(
-                margin: const EdgeInsets.only(top: 24, bottom: 8),
+                margin: const EdgeInsets.only(top: 16, bottom: 8),
                 padding: EdgeInsets.symmetric(
                   horizontal: size.width > 1000 ? size.width * .2 : 16,
                 ),
@@ -96,13 +97,17 @@ class _TestScreenState extends State<TestScreen> {
                       ),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: size.width > 960
-                            ? 5
+                            ? 3
                             : size.width > 600
-                                ? 4
-                                : 3,
-                        childAspectRatio: .8,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
+                                ? 3
+                                : 2,
+                        childAspectRatio: size.width > 960
+                            ? 1.3
+                            : size.width > 600
+                                ? 1.2
+                                : 1.4,
+                        mainAxisSpacing: 16,
+                        crossAxisSpacing: 16,
                       ),
                       itemCount: testList.length,
                       itemBuilder: (context, index) =>
@@ -140,8 +145,88 @@ class Tests {
 
 List<Tests> testList = [
   Tests(
+    id: '1',
+    title: 'Social Anxiety',
+    description:
+        "Social anxiety, also known as social phobia, is a mental health condition characterized by a significant and persistent fear of social situations. People with social anxiety disorder experience intense anxiety and distress in situations where they may be judged by others, such as giving a presentation, meeting new people, or eating in public. This fear can be so severe that it interferes with their daily lives, making it difficult to go to work or school, maintain relationships, and engage in social activities.",
+    author: 'N/A',
+    color: kLightBlueColor,
+    image: '5',
+    items: '28',
+    route: '/tests/social-anxiety',
+  ),
+  Tests(
+    id: '2',
+    title: 'Self Esteem Test',
+    description:
+        "Self-esteem is a person's overall subjective evaluation of their worth or value. It is a complex concept that is influenced by a variety of factors, including genetics, personality, life experiences, and social relationships. Self-esteem is important because it can have a significant impact on our thoughts, behaviors, and overall well-being.",
+    author: 'N/A',
+    color: kPurpleColor,
+    image: '2',
+    items: '10',
+    route: '/tests/self-esteem',
+  ),
+  Tests(
+    id: '3',
+    title: 'Dark Triad Dirty Dozen',
+    description:
+        "The Dark Triad Dirty Dozen is a set of 12 personality traits that are associated with the Dark Triad personality types of Machiavellianism, Narcissism, and Psychopathy. These traits are often described as 'dirty'' because they are associated with negative and harmful behaviors. For example, people who are high in Machiavellianism are more likely to engage in manipulative and exploitative behaviors. People who are high in narcissism are more likely to be arrogant and entitled. And people who are high in psychopathy are more likely to engage in impulsive and antisocial behaviors.",
+    author: 'N/A',
+    color: kPinkColor,
+    image: '3',
+    items: '12',
+    route: '/tests/dark-triad',
+  ),
+  Tests(
+    id: '4',
+    title: 'Internet Addiction Test',
+    description:
+        "Internet addiction is a behavioral addiction that is characterized by excessive use of the internet, to the point where it interferes with daily life. People with internet addiction may spend hours online each day, neglecting their work, studies, relationships, and other important activities. They may also experience withdrawal symptoms when they are not able to use the internet, such as anxiety, irritability, and difficulty concentrating.",
+    author: 'N/A',
+    color: kBlueColor,
+    image: '6',
+    items: '18',
+    route: '/tests/internet-addiction',
+  ),
+  Tests(
+    id: '5',
+    title: 'Depression, Anxiety & Stress Test',
+    description:
+        "Depression, anxiety, and stress are the three most common mental health conditions in the world. They are all characterized by changes in mood, thinking, and behavior. Depression, anxiety, and stress can co-occur, and they can all have a significant impact on a person's life. For example, people with depression may have difficulty getting out of bed, going to work, or socializing. People with anxiety may avoid social situations or activities that they enjoy. And people with stress may have difficulty concentrating, making decisions, and coping with everyday challenges.",
+    author: 'N/A',
+    color: kMediumBlueColor,
+    image: '4',
+    items: '20',
+    route: '/tests/das',
+  ),
+  Tests(
+    id: '6',
+    title: 'Wellbeing Test',
+    description:
+        'Wellbeing refers to a state of positive mental and emotional health. It is characterized by feelings of happiness, satisfaction, and contentment. Wellbeing is also associated with a sense of purpose and meaning in life, as well as strong social relationships.',
+    author: 'WHO',
+    color: kGreenColor,
+    image: '1',
+    items: '5',
+    route: '/tests/wellbeing',
+  ),
+  Tests(
+    id: '7',
+    title: 'Insomnia',
+    description:
+        'Insomnia is a sleep disorder in which you have trouble falling and/or staying asleep. The condition can be short-term (acute) or can last a long time (chronic). It may also come and go. Acute insomnia lasts from 1 night to a few weeks. Insomnia is chronic when it happens at least 3 nights a week for 3 months or more.',
+    author: 'N/A',
+    color: kMediumBlueColor,
+    image: '11',
+    items: '7',
+    route: '/tests/insomnia',
+  ),
+];
+
+List<Tests> testList1 = [
+  Tests(
     id: '01',
-    title: 'Wellbeing Scale',
+    title: 'Wellbeing Test',
     description:
         'Wellbeing refers to a state of positive mental and emotional health. It is characterized by feelings of happiness, satisfaction, and contentment. Wellbeing is also associated with a sense of purpose and meaning in life, as well as strong social relationships.',
     author: 'WHO',
@@ -152,9 +237,9 @@ List<Tests> testList = [
   ),
   Tests(
     id: '02',
-    title: 'Self Esteem',
+    title: 'Self Esteem Test',
     description:
-        "Self-esteem in psychology is a person's overall subjective evaluation of their worth or value. It is a complex concept that is influenced by a variety of factors, including genetics, personality, life experiences, and social relationships. Self-esteem is important because it can have a significant impact on our thoughts, behaviors, and overall well-being.",
+        "Self-esteem is a person's overall subjective evaluation of their worth or value. It is a complex concept that is influenced by a variety of factors, including genetics, personality, life experiences, and social relationships. Self-esteem is important because it can have a significant impact on our thoughts, behaviors, and overall well-being.",
     author: 'N/A',
     color: kPurpleColor,
     image: '2',
@@ -163,7 +248,7 @@ List<Tests> testList = [
   ),
   Tests(
     id: '03',
-    title: 'Depression, Anxiety & Stress Scale',
+    title: 'Depression, Anxiety & Stress Test',
     description:
         "Depression, anxiety, and stress are the three most common mental health conditions in the world. They are all characterized by changes in mood, thinking, and behavior. Depression, anxiety, and stress can co-occur, and they can all have a significant impact on a person's life. For example, people with depression may have difficulty getting out of bed, going to work, or socializing. People with anxiety may avoid social situations or activities that they enjoy. And people with stress may have difficulty concentrating, making decisions, and coping with everyday challenges.",
     author: 'N/A',
@@ -207,7 +292,7 @@ List<Tests> testList = [
   ),
   Tests(
     id: '07',
-    title: 'Hopelessness Scale(Beck)',
+    title: 'Hopelessness Test',
     description:
         'The Beck Hopelessness Scale (BHS) is a 20-item self-report inventory developed by Dr. Aaron T. Beck that was designed to measure three major aspects of hopelessness: feelings about the future, loss of motivation, and expectations. It is a true-false test designed for adults.',
     author: 'N/A',
@@ -240,9 +325,9 @@ List<Tests> testList = [
   ),
   Tests(
     id: '10',
-    title: 'General Anxiety Disorder',
+    title: 'General Anxiety Test',
     description:
-        'Generalized anxiety disorder is a condition of excessive worry about everyday issues and situations. It lasts longer than 6 months. In addition to feeling worried you may also feel restlessness, fatigue, trouble concentrating, irritability, increased muscle tension, and trouble sleeping.',
+        'The General Anxiety Test is a psychological assessment tool designed to evaluate the presence and severity of symptoms related to generalized anxiety disorder (GAD). It typically consists of a series of questions that assess various aspects of anxiety.',
     author: 'N/A',
     color: kPinkColor,
     image: '10',
